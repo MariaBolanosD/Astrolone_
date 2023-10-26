@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("astrolone_");
 		new Lwjgl3Application(new AstroLone(), config);
-		// hello
+		// hello Sara
 	}
 }
