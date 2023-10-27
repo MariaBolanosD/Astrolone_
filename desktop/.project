@@ -26,5 +26,15 @@
 			<type>2</type>
 			<location>C:/Users/Maria/git/astrolone_/Astrolone_/assets</location>
 		</link>
+		<link>
+			<name>assets/badlogic.jpg</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Downloads/badlogic.jpg</locationURI>
+		</link>
+		<link>
+			<name>assets/droplet.png</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Desktop/SARA/GIF/droplet.png</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
