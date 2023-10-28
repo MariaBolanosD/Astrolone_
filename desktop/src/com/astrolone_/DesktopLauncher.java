@@ -12,6 +12,7 @@ public class DesktopLauncher {
 		config.setTitle("astrolone_");
 		new Lwjgl3Application(new Drop(), config);
 
+		
 		Drop drop = new Drop();
 		drop.create();
 		drop.render();
