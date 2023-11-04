@@ -16,5 +16,6 @@ public class DesktopLauncher {
 		Drop drop = new Drop();
 		drop.create();
 		drop.render();
+		drop.dispose();
 	}
 }

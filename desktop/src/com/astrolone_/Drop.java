@@ -16,7 +16,6 @@ public class Drop extends ApplicationAdapter {
    private Texture bucketImage;
    private SpriteBatch batch;
    private OrthographicCamera camera;
-   private Rectangle bucket;
    private Sprite sprite;
    @Override
    public void create() {
