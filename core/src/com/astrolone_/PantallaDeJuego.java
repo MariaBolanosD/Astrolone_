@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+
+import MainGame.MainGame;
 import ayudas.Constantes;
 
 public class PantallaDeJuego extends ScreenAdapter{
@@ -18,12 +20,15 @@ public class PantallaDeJuego extends ScreenAdapter{
 	private World mundo;
 	private Box2DDebugRenderer box2DDebugRenderer;
 	
-	
 	public PantallaDeJuego(OrthographicCamera camara) {
 		this.camara = camara;
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
+	}
+
+	public PantallaDeJuego(MainGame game) {
+		// TODO Auto-generated constructor stub
 	}
 
 	private void update() {
@@ -58,6 +63,7 @@ public class PantallaDeJuego extends ScreenAdapter{
 		box2DDebugRenderer.render(mundo, camara.combined.scl(Constantes.pixelesPorMetro));
 		
 	}
+	
 	
 	
 
