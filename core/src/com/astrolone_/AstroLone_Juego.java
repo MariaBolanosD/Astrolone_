@@ -44,7 +44,7 @@ public class AstroLone_Juego extends Game {
         this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
         
         //cambiar constructor de patalla de juego
-        this.setScreen(new PauseMenu(this));
+        this.setScreen(new PantallaDeJuego(this));
 		
 	}
 	

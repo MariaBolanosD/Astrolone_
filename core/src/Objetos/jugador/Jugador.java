@@ -1,6 +1,9 @@
 package Objetos.jugador;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +16,15 @@ import ayudas.Constantes;
 
 public class Jugador extends EntidadEspacial{
 
+	public enum Direction {
+		UP, DOWN, LEFT, RIGHT;
+	}
+	
+	 boolean leftMove;
+	 boolean rightMove;
+	 boolean downMove;
+	 boolean upMove;
+	
 	private Sprite sprite;
 	private Texture bucketImage;
 	
@@ -29,6 +41,8 @@ public class Jugador extends EntidadEspacial{
 	public void update() {
 		x = cuerpo.getPosition().x * Constantes.pixelesPorMetro;
 		y = cuerpo.getPosition().y * Constantes.pixelesPorMetro;
+		
+		updateMotion();
 	}
 
 	@Override
@@ -38,6 +52,46 @@ public class Jugador extends EntidadEspacial{
 	      sprite.draw(batch);
 	}
 	
+	public void updateMotion()
+	{
+		if (leftMove)
+	    {
+			sprite.setX(sprite.getX() -200 * Gdx.graphics.getDeltaTime());
+	    }
+	    if (rightMove)
+	    {
+	    	sprite.setX(sprite.getX() +200 * Gdx.graphics.getDeltaTime());
+	    }
+	    if(upMove)
+	    {
+	    	sprite.setY(sprite.getY() +200 * Gdx.graphics.getDeltaTime());
+	    }
+	    if(downMove)
+	    {
+	    	sprite.setY(sprite.getY() -200 * Gdx.graphics.getDeltaTime());
+	    }
+	    
+	}
 	
-
+	public void setLeftMove(boolean t)
+    {
+	    if(rightMove && t) rightMove = false;
+	    leftMove = t;
+    }
+    public void setRightMove(boolean t)
+    {
+	    if(leftMove && t) leftMove = false;
+	    rightMove = t;
+    }
+    public void setUpMove(boolean t)
+    {
+	    if(downMove && t) downMove = false;
+	    upMove = t;
+    }
+    public void setDownMove(boolean t)
+    {
+	    if(upMove && t) upMove = false;
+	    downMove = t;
+    }
+    
 }

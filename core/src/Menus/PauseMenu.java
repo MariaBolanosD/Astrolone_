@@ -61,18 +61,27 @@ public class PauseMenu extends ScreenAdapter{
 				PauseMenu.this.dispose();
 				PauseMenu.this.game.setScreen(new PantallaDeJuego(PauseMenu.this.game));
 
-              if (fullScreenCheck.isChecked() && !PauseMenu.this.game.isFullScreen()) {
-            	  PauseMenu.this.game.setFullscreen();
-              }
-
-              if (!fullScreenCheck.isChecked() && PauseMenu.this.game.isFullScreen()) {
-            	  PauseMenu.this.game.setWindowed();
-              }
+             
 			}
           
 		});
+	     
+	     fullScreenCheck.addListener(new ChangeListener() {
+	    	 
+	    	 public void changed (ChangeEvent event, Actor actor) {
+	    		 
+	    	 
+	    		 if (fullScreenCheck.isChecked() && !PauseMenu.this.game.isFullScreen()) {
+	    			 PauseMenu.this.game.setFullscreen();
+	    		 }
+
+	    		 if (!fullScreenCheck.isChecked() && PauseMenu.this.game.isFullScreen()) {
+	    			 PauseMenu.this.game.setWindowed();
+	    		 }
+	    	 }
       
-      
+	     });
+	    
 	 }
 	 
 	// este método actualiza el viewport cuando se ajusta
