@@ -16,12 +16,12 @@ public class Drop extends ApplicationAdapter {
    private Texture bucketImage;
    private SpriteBatch batch;
    private OrthographicCamera camera;
-   private Rectangle bucket;
-   private Sprite sprite;
+   public Sprite sprite;
    @Override
    public void create() {
       // load the images for the droplet and the bucket, 64x64 pixels each
       bucketImage = new Texture(Gdx.files.internal("droplet.png"));
+      
 
       // create the camera and the SpriteBatch
       camera = new OrthographicCamera();
