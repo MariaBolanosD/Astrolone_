@@ -7,10 +7,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import Objetos.jugador.Jugador;
 import ayudas.Constantes;
 
 public class PantallaDeJuego extends ScreenAdapter{
@@ -23,6 +27,8 @@ public class PantallaDeJuego extends ScreenAdapter{
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
 	private Stage stage;
+	
+	private Jugador jugador;
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -37,7 +43,9 @@ public class PantallaDeJuego extends ScreenAdapter{
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
-		
+
+		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
+		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
@@ -68,12 +76,12 @@ public class PantallaDeJuego extends ScreenAdapter{
 		
 		batch.begin();
 		//Render de objetos
+		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
 		
-		
+		jugador.render(batch);
 		
 		batch.end();
 		
-		box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
 		
 	}
 	
