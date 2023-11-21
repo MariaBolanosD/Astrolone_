@@ -20,6 +20,8 @@ import Menus.PauseMenu;
 import Objetos.jugador.Jugador;
 import Objetos.jugador.Jugador.Direction;
 import ayudas.Constantes;
+import enemy_logic.Enemies;
+import enemy_logic.EnemyBatch;
 
 public class PantallaDeJuego extends ScreenAdapter {
 	
@@ -33,6 +35,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private Stage stage;
 	
 	private Jugador jugador;
+	private EnemyBatch enemy;
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -110,6 +113,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
+		this.enemy = new EnemyBatch();
+
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
@@ -126,6 +131,10 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private void update() {
 		mundo.step(1/60, 6, 2);
 		jugador.update();
+//		for(Enemies enemi:enemy)
+//		{
+//			enemi.update();
+//		}
 		batch.setProjectionMatrix(game.getCamera().combined);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 			Gdx.app.exit();
@@ -151,10 +160,19 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		jugador.render(batch);
 		
+		for(Enemies en : enemy.getEnemies())
+		{
+			en.render(batch);
+			//System.out.println(2);
+			//System.out.println( en.getSprite_enemy().getX());
+		}
+		
+		
 		batch.end();
 		
 		
 	}
+	
 	
 	
 
