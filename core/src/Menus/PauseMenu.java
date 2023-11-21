@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -41,6 +42,12 @@ public class PauseMenu extends ScreenAdapter{
 	        
 	     // añadimos la tabla al grafo de escena
 	     stage.addActor(table);
+	     
+	     final Window textArea = new Window("Menu Pausa", game.getDefaultSkin());
+	     table.row();
+	     table.add(textArea).center();
+	     table.row();
+	     
 	     
 	     // creamos un widget de tipo botón con el skin cargado anteriormente
 	     // el widget se añade a la tabla con unos tamaños mínimos y con un

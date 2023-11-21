@@ -6,7 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -38,10 +41,14 @@ public class MenuPrincipal extends ScreenAdapter{
 		     // añadimos la tabla al grafo de escena
 		     stage.addActor(table);		  		 
 		  
+		     final Window textArea = new Window("Menu Principal", game.getDefaultSkin());
+		     table.row();
+		     table.add(textArea).center();
+		     
 		     // añadimos un segundo botón para volver al menú principal
 		     final TextButton exitButton = new TextButton("Start Game", game.getDefaultSkin());
 		     table.row();
-		     table.add(exitButton).minWidth(200);
+		     table.add(exitButton).minWidth(200).padTop(100);
 		     
 		     exitButton.addListener(new ChangeListener() {
 
