@@ -1,6 +1,7 @@
 package Menus;
 
 import com.astrolone_.AstroLone_Juego;
+import com.astrolone_.MenuPrincipal;
 import com.astrolone_.PantallaDeJuego;
 import com.badlogic.gdx.Gdx;
 
@@ -55,6 +56,12 @@ public class PauseMenu extends ScreenAdapter{
 	     table.row();
 	     table.add(exitButton).minWidth(200);
 	     
+	     // añadimos un segundo botón para volver al menú principal
+	     final TextButton mainMenuButonButton = new TextButton("Main Menu", game.getDefaultSkin());
+	     table.row();
+	     table.add(mainMenuButonButton).minWidth(200);
+	     
+	     
 	     exitButton.addListener(new ChangeListener() {
 
 			public void changed (ChangeEvent event, Actor actor) {
@@ -65,6 +72,17 @@ public class PauseMenu extends ScreenAdapter{
 			}
           
 		});
+	     
+	     mainMenuButonButton.addListener(new ChangeListener() {
+
+				public void changed (ChangeEvent event, Actor actor) {
+					PauseMenu.this.dispose();
+					PauseMenu.this.game.setScreen(new MenuPrincipal(PauseMenu.this.game));
+
+	             
+				}
+	          
+			});
 	     
 	     fullScreenCheck.addListener(new ChangeListener() {
 	    	 
