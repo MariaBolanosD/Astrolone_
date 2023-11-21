@@ -26,5 +26,10 @@
 			<type>2</type>
 			<location>C:/Users/victo/Documents/GitHub/Astrolone_/assets</location>
 		</link>
+		<link>
+			<name>assets/droplet.png</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Downloads/droplet.png</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>
