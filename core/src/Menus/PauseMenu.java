@@ -48,6 +48,7 @@ public class PauseMenu extends ScreenAdapter{
 	     table.add(textArea).center();
 	     table.row();
 	     
+	     //dkjgad kjasd
 	     
 	     // creamos un widget de tipo botón con el skin cargado anteriormente
 	     // el widget se añade a la tabla con unos tamaños mínimos y con un
