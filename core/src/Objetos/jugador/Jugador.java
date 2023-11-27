@@ -94,4 +94,6 @@ public class Jugador extends EntidadEspacial{
 	    downMove = t;
     }
     
+    
+    
 }

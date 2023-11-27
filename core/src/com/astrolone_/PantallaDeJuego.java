@@ -1,5 +1,7 @@
 package com.astrolone_;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
@@ -17,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import Menus.PauseMenu;
+import Objetos.jugador.Disparo;
 import Objetos.jugador.Jugador;
 import Objetos.jugador.Jugador.Direction;
 import ayudas.Constantes;
@@ -36,6 +39,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	private Jugador jugador;
 	private EnemyBatch enemy;
+	private ArrayList<Disparo> disparos;
+	
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -114,7 +119,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
 		this.enemy = new EnemyBatch();
-
+		this.disparos = new ArrayList<>();
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
@@ -137,8 +142,17 @@ public class PantallaDeJuego extends ScreenAdapter {
 //		}
 		batch.setProjectionMatrix(game.getCamera().combined);
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			Gdx.app.exit();
+			disparos.add(new Disparo(jugador.getX(),jugador.getY()));
 		}
+		
+		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
+		for(Disparo disparo : disparos) {
+			disparo.update(Gdx.graphics.getDeltaTime());
+			if (disparo.borrar) {
+				disparosBorrar.add(disparo);
+			}
+		}
+		disparos.removeAll(disparosBorrar);
 	}
 	
 	private void updateCamara() {
@@ -159,6 +173,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
 		
 		jugador.render(batch);
+		for (Disparo disparo : disparos) {
+			disparo.render(batch);
+		}
 		
 		for(Enemies en : enemy.getEnemies())
 		{
