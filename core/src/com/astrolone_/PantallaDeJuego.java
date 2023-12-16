@@ -7,22 +7,20 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.ScreenAdapter;import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import Menus.PauseMenu;
 import Objetos.jugador.Disparo;
 import Objetos.jugador.Jugador;
-import Objetos.jugador.Jugador.Direction;
-import ayudas.Constantes;
 import enemy_logic.Enemies;
 import enemy_logic.EnemyBatch;
 
@@ -117,7 +115,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
-		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
+		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("droplet.png")));
 		this.enemy = new EnemyBatch();
 		this.disparos = new ArrayList<>();
 		
@@ -141,8 +139,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 //			enemi.update();
 //		}
 		batch.setProjectionMatrix(game.getCamera().combined);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			disparos.add(new Disparo(jugador.getX(),jugador.getY()));
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
 		
 		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
@@ -171,8 +170,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		batch.begin();
 		//Render de objetos
 		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
-		
-		jugador.render(batch);
+		jugador.draw(batch);
 		for (Disparo disparo : disparos) {
 			disparo.render(batch);
 		}

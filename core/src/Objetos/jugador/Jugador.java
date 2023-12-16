@@ -1,99 +1,89 @@
 package Objetos.jugador;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
 
 import Objetos.EntidadEspacial;
-import ayudas.Constantes;
 
 
 
-public class Jugador extends EntidadEspacial{
+public class Jugador extends EntidadEspacial
+{
 
-	public enum Direction {
-		UP, DOWN, LEFT, RIGHT;
-	}
+	private int vida;
+	private boolean leftMove,rightMove,upMove,downMove;
 	
-	 boolean leftMove;
-	 boolean rightMove;
-	 boolean downMove;
-	 boolean upMove;
-	
-	private Sprite sprite;
-	private Texture bucketImage;
-	
-	public Jugador(float largura, float altura, Body cuerpo) {
-		super(largura, altura, cuerpo);
-		this.velocidad = 4f;
-		
-		bucketImage = new Texture(Gdx.files.internal("droplet.png"));
-		sprite = new Sprite(bucketImage);
-	    sprite.setScale(0.5f);
+	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
+		super(velocidad, centroX, centroY, ancho, alto, textura);
+		this.vida = 3;
 	}
 
 	@Override
 	public void update() {
-		x = cuerpo.getPosition().x * Constantes.pixelesPorMetro;
-		y = cuerpo.getPosition().y * Constantes.pixelesPorMetro;
-		
-		updateMotion();
-	}
-
-	@Override
-	public void render(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-		
-	      sprite.draw(batch);
-	}
-	
-	public void updateMotion()
-	{
 		if (leftMove)
 	    {
-			sprite.setX(sprite.getX() -200 * Gdx.graphics.getDeltaTime());
+			setPosicionX(posicionX -200 * Gdx.graphics.getDeltaTime());;
+			
 	    }
 	    if (rightMove)
 	    {
-	    	sprite.setX(sprite.getX() +200 * Gdx.graphics.getDeltaTime());
+	    	setPosicionX(posicionX + 200 * Gdx.graphics.getDeltaTime());
+	    	
 	    }
 	    if(upMove)
 	    {
-	    	sprite.setY(sprite.getY() +200 * Gdx.graphics.getDeltaTime());
+	    	setPosicionY(posicionY + 200 * Gdx.graphics.getDeltaTime());
+
 	    }
 	    if(downMove)
 	    {
-	    	sprite.setY(sprite.getY() -200 * Gdx.graphics.getDeltaTime());
+	    	setPosicionY(posicionY - 200 * Gdx.graphics.getDeltaTime());
+	    	
 	    }
-	    
+		
+	}
+
+	public int getVida() {
+		return vida;
+	}
+
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	public boolean isLeftMove() {
+		return leftMove;
+	}
+
+	public void setLeftMove(boolean leftMove) {
+		this.leftMove = leftMove;
+	}
+
+	public boolean isRightMove() {
+		return rightMove;
+	}
+
+	public void setRightMove(boolean rightMove) {
+		this.rightMove = rightMove;
+	}
+
+	public boolean isUpMove() {
+		return upMove;
+	}
+
+	public void setUpMove(boolean upMove) {
+		this.upMove = upMove;
+	}
+
+	public boolean isDownMove() {
+		return downMove;
+	}
+
+	public void setDownMove(boolean downMove) {
+		this.downMove = downMove;
 	}
 	
-	public void setLeftMove(boolean t)
-    {
-	    if(rightMove && t) rightMove = false;
-	    leftMove = t;
-    }
-    public void setRightMove(boolean t)
-    {
-	    if(leftMove && t) leftMove = false;
-	    rightMove = t;
-    }
-    public void setUpMove(boolean t)
-    {
-	    if(downMove && t) downMove = false;
-	    upMove = t;
-    }
-    public void setDownMove(boolean t)
-    {
-	    if(upMove && t) upMove = false;
-	    downMove = t;
-    }
-    
-    
-    
+	
+
+	
 }
