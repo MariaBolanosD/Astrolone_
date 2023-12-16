@@ -38,6 +38,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private Jugador jugador;
 	private EnemyBatch enemy;
 	private ArrayList<Disparo> disparos;
+	private static final float TIEMPO_ESPERA_DISPARO = 0.3f;
+	private float esperaDeDisparo = 0;
 	
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
@@ -134,12 +136,14 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private void update() {
 		mundo.step(1/60, 6, 2);
 		jugador.update();
+
 //		for(Enemies enemi:enemy)
 //		{
 //			enemi.update();
 //		}
 		batch.setProjectionMatrix(game.getCamera().combined);
-		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
+			esperaDeDisparo=0;
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
@@ -163,7 +167,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	@Override
 	public void render(float delta) {
 		this.update();
-		
+		esperaDeDisparo+=delta;
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		

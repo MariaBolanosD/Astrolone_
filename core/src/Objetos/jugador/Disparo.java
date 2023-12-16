@@ -13,6 +13,7 @@ public class Disparo {
 	float x,y;
 	float ratonX,ratonY;
 	float velX,velY;
+
 	
 	public boolean borrar = false;
 	
@@ -21,6 +22,7 @@ public class Disparo {
 		this.y = y;
 		this.ratonX = ratonX;
 		this.ratonY = ratonY;
+		
 		
 		
 		
@@ -62,6 +64,7 @@ public class Disparo {
 	
 	public void render(SpriteBatch batch) {
 		batch.draw(textura,x,y);
+		
 	}
 	
 	
