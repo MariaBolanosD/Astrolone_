@@ -26,8 +26,8 @@ public class LoginScreenSwing extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private JTextField nombreUsuario = new JTextField(10);
-	private JTextField contrasenya = new JTextField(10);
+	private JTextField nombreUsuario = new JTextField(20);
+	private JTextField contrasenya = new JTextField(20);
 	
 	public LoginScreenSwing(List<Usuario> listaUsuariosRecibida) {
 		final List<Usuario> listaUsuarios = listaUsuariosRecibida;
@@ -46,14 +46,17 @@ public class LoginScreenSwing extends JFrame {
 		JButton botonAceptar = new JButton("Aceptar");
 		JButton botonCancelar = new JButton("Cancelar");
 		JButton botonRegistrar = new JButton("Registrar");
+		JButton botonPuntuaciones = new JButton("Puntuaciones");
+		
 		pUsuario.add(nombreUsuario,BorderLayout.SOUTH);
 		pContrasenya.add(contrasenya,BorderLayout.SOUTH);
 		
-		pCentral.setLayout(new GridLayout(2,2));
+		pCentral.setLayout(new GridLayout(2,2,5,5));
 		pCentral.add(lUsuario);
 		pCentral.add(pUsuario);
 		pCentral.add(lContrasenya);
 		pCentral.add(pContrasenya);
+		pBotones.add(botonPuntuaciones);
 		pBotones.add(botonRegistrar);
 		pBotones.add(botonCancelar);
 		pBotones.add(botonAceptar);
@@ -78,12 +81,15 @@ public class LoginScreenSwing extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(listaUsuarios.contains(new Usuario(nombreUsuario.getText(),contrasenya.getText()))) {
-//					if(nombreUsuario.getText().equals("admin") && contrasenya.getText().equals("admin")) {
-//						dispose();
-//						AdminSwing ventanaUsuario = new AdminSwing(listaUsuarios);
-//					}else{
+					if(nombreUsuario.getText().equals("admin") && contrasenya.getText().equals("admin")) {
+						dispose();
+						new AdminSwing(listaUsuarios);
+					}else if(listaUsuarios.get(listaUsuarios.indexOf(new Usuario(nombreUsuario.getText(),""))).getContrasenyaUsuario().equals(contrasenya.getText())){
 						JOptionPane.showMessageDialog(null, "Has iniciado sesion correctamente");
-//					}
+					}else {
+						JOptionPane.showMessageDialog(null, "La contraseña no coincide");
+						
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "No existe un usuario con los datos introducidos");
 				}
@@ -94,7 +100,7 @@ public class LoginScreenSwing extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				RegisterScreenSwing vent = new RegisterScreenSwing(listaUsuarios);
+				 new RegisterScreenSwing(listaUsuarios);
 			}
 		});
 //		nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
