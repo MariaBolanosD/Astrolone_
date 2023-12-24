@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -77,6 +78,20 @@ public class RegisterScreenSwing extends JFrame{
 			}
 		});
 		
+		bRegistrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(listaUsuarios.contains(new Usuario(tfUsuario.getText(),""))) {
+					JOptionPane.showConfirmDialog(null, "Ya existe un Usuario con ese nickname elija otro");
+				}else if (!tfContrasenya.getText().equals(tfConfirma.getText())) {
+					JOptionPane.showConfirmDialog(null, "La contraseña introducida ha de ser la misma");
+				} else {
+					listaUsuarios.add(new Usuario(tfUsuario.getText(),tfContrasenya.getText()));
+					JOptionPane.showConfirmDialog(null, "Te has registrado exitosamente");
+				}
+			}
+		});
 		
 		
 		
@@ -85,7 +100,6 @@ public class RegisterScreenSwing extends JFrame{
 	
 	public static void main(String[] args) {
 		List<Usuario> listaUsuarios = new ArrayList<>();
-		listaUsuarios.add(new Usuario("admin","admin"));
 		RegisterScreenSwing vent = new RegisterScreenSwing(listaUsuarios);
 	}
 }
