@@ -1,36 +1,54 @@
 package Objetos;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class EntidadEspacial {
 	
-	protected float x, y, velX, VelY, velocidad;
-	protected float	largura, altura;
-	protected Body cuerpo;
+	float Velocidad;
+	protected float posicionX,posicionY;
+	protected float ancho,alto;
 	
-	public EntidadEspacial(float largura, float altura, Body cuerpo) {
-		this.x = cuerpo.getPosition().x;
-		this.y = cuerpo.getPosition().y;
-		this.largura = largura;
-		this.altura = altura;
-		this.cuerpo = cuerpo;
-		this.velX = 0f;
-		this.VelY = 0f;
-		this.velocidad = 0f;
-		
+	Texture textura;
+	
+	
+
+	public EntidadEspacial(float velocidad, float centroX, float centroY, float ancho, float alto,
+			Texture textura) {
+		this.Velocidad = velocidad;
+		this.posicionX = centroX - ancho/2;
+		this.posicionY = centroY - alto/2;
+		this.ancho = ancho;
+		this.alto = alto;
+		this.textura = textura;
+	}
+	
+	public void draw(Batch batch) {
+		batch.draw(textura, posicionX, posicionY, ancho, alto);
+	}
+
+	
+	public abstract void update();
+	
+	    
+
+	public float getPosicionX() {
+		return posicionX;
+	}
+
+	public float getPosicionY() {
+		return posicionY;
+	}
+
+	public void setPosicionX(float posicionX) {
+		this.posicionX = posicionX;
+	}
+
+	public void setPosicionY(float posicionY) {
+		this.posicionY = posicionY;
 	}
 	
 	
-	public abstract void  update();
 	
-	public abstract void render(SpriteBatch batch);
-	
-	public Body getBody() {
-		return cuerpo;
-	}
-	
-	
-	
-	
+
 }

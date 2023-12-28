@@ -1,25 +1,26 @@
 package com.astrolone_;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.ScreenAdapter;import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import Menus.PauseMenu;
+import Objetos.jugador.Disparo;
 import Objetos.jugador.Jugador;
-import Objetos.jugador.Jugador.Direction;
-import ayudas.Constantes;
 import enemy_logic.Enemies;
 import enemy_logic.EnemyBatch;
 
@@ -36,6 +37,10 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	private Jugador jugador;
 	private EnemyBatch enemy;
+	private ArrayList<Disparo> disparos;
+	private static final float TIEMPO_ESPERA_DISPARO = 0.3f;
+	private float esperaDeDisparo = 0;
+	
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -112,9 +117,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
-		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
+		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("droplet.png")));
 		this.enemy = new EnemyBatch();
-
+		this.disparos = new ArrayList<>();
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
@@ -131,14 +136,26 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private void update() {
 		mundo.step(1/60, 6, 2);
 		jugador.update();
+
 //		for(Enemies enemi:enemy)
 //		{
 //			enemi.update();
 //		}
 		batch.setProjectionMatrix(game.getCamera().combined);
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-			Gdx.app.exit();
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
+			esperaDeDisparo=0;
+			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
+		
+		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
+		for(Disparo disparo : disparos) {
+			disparo.update(Gdx.graphics.getDeltaTime());
+			if (disparo.borrar) {
+				disparosBorrar.add(disparo);
+			}
+		}
+		disparos.removeAll(disparosBorrar);
 	}
 	
 	private void updateCamara() {
@@ -150,15 +167,17 @@ public class PantallaDeJuego extends ScreenAdapter {
 	@Override
 	public void render(float delta) {
 		this.update();
-		
+		esperaDeDisparo+=delta;
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
 		//Render de objetos
 		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
-		
-		jugador.render(batch);
+		jugador.draw(batch);
+		for (Disparo disparo : disparos) {
+			disparo.render(batch);
+		}
 		
 		for(Enemies en : enemy.getEnemies())
 		{
