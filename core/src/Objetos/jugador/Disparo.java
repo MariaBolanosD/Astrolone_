@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import ayudas.ReaccionColisiones;
+
 
 public class Disparo {
 	
@@ -14,7 +16,7 @@ public class Disparo {
 	float ratonX,ratonY;
 	float velX,velY;
 
-	
+	ReaccionColisiones reac;
 	public boolean borrar = false;
 	
 	public Disparo(float x, float y,float ratonX, float ratonY) {
@@ -22,6 +24,7 @@ public class Disparo {
 		this.y = y;
 		this.ratonX = ratonX;
 		this.ratonY = ratonY;
+		this.reac = new ReaccionColisiones(x, y, 45, 45);
 		
 		
 		
@@ -53,6 +56,11 @@ public class Disparo {
 		return (float) (origen-destino);
 	}
 
+	
+	public ReaccionColisiones getReac() {
+		return reac;
+	}
+
 	public void update (float deltaTime) {
 		y += velocidad * velY * deltaTime;
 		x += velocidad * velX * deltaTime;
@@ -60,6 +68,8 @@ public class Disparo {
 		if (y > Gdx.graphics.getBackBufferHeight()+ 300) {
 			borrar = true;
 		}
+		
+		reac.mover(x, y);
 	}
 	
 	public void render(SpriteBatch batch) {
