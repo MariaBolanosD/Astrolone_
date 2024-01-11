@@ -1,5 +1,6 @@
 package Objetos.jugador;
 
+import com.astrolone_.AstroLone_Juego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -22,23 +23,33 @@ public class Jugador extends EntidadEspacial
 	public void update() {
 		if (leftMove)
 	    {
-			setPosicionX(posicionX -200 * Gdx.graphics.getDeltaTime());;
+			setPosicionX(posicionX -200 * Gdx.graphics.getDeltaTime());
+			if (posicionX < 0) {
+				posicionX = 0;
+			}
 			
 	    }
 	    if (rightMove)
 	    {
 	    	setPosicionX(posicionX + 200 * Gdx.graphics.getDeltaTime());
-	    	
+	    	if(posicionX + ancho > AstroLone_Juego.INSTANCE.DEFAULT_WIDTH) {
+	    		posicionX = AstroLone_Juego.INSTANCE.DEFAULT_WIDTH-ancho;
+	    	}
 	    }
 	    if(upMove)
 	    {
 	    	setPosicionY(posicionY + 200 * Gdx.graphics.getDeltaTime());
+	    	if(posicionY + alto > AstroLone_Juego.INSTANCE.DEFAULT_HEIGHT) {
+	    		posicionY = AstroLone_Juego.INSTANCE.DEFAULT_HEIGHT-alto;
+	    	}
 
 	    }
 	    if(downMove)
 	    {
 	    	setPosicionY(posicionY - 200 * Gdx.graphics.getDeltaTime());
-	    	
+	    	if(posicionY < 0) {
+	    		posicionY = 0;
+	    	}
 	    }
 		
 	}
