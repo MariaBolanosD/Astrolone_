@@ -1,5 +1,6 @@
 package com.astrolone_;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -41,6 +45,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private static final float TIEMPO_ESPERA_DISPARO = 0.3f;
 	private float esperaDeDisparo = 0;
 	
+	private BitmapFont fuentePuntuacion;
+	private int puntuacion;
 	
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -117,9 +123,12 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
-		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("droplet.png")));
+		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("naveJugador.png")));
 		this.enemy = new EnemyBatch();
 		this.disparos = new ArrayList<>();
+		
+		this.fuentePuntuacion = new BitmapFont(Gdx.files.internal("fuentes/score.fnt"));
+		puntuacion = 0;
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
@@ -136,6 +145,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private void update() {
 		mundo.step(1/60, 6, 2);
 		jugador.update();
+		
 
 //		for(Enemies enemi:enemy)
 //		{
@@ -144,6 +154,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		batch.setProjectionMatrix(game.getCamera().combined);
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
 			esperaDeDisparo=0;
+			puntuacion = puntuacion+10;
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
@@ -156,6 +167,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 			}
 		}
 		disparos.removeAll(disparosBorrar);
+		
+		//Despues de actualizar todo, mirar si hay colisiones 
 	}
 	
 	private void updateCamara() {
@@ -174,6 +187,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 		batch.begin();
 		//Render de objetos
 		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
+		GlyphLayout puntuacionLayout = new GlyphLayout(fuentePuntuacion, ""+puntuacion);
+		fuentePuntuacion.draw(batch, puntuacionLayout, AstroLone_Juego.INSTANCE.DEFAULT_WIDTH-puntuacionLayout.width - 10, AstroLone_Juego.INSTANCE.DEFAULT_HEIGHT-puntuacionLayout.height);
 		jugador.draw(batch);
 		for (Disparo disparo : disparos) {
 			disparo.render(batch);

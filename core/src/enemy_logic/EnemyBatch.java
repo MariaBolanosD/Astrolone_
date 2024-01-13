@@ -80,4 +80,6 @@ public class EnemyBatch {
 	  {
 		  return this.Enemy;
 	  }
+	  
+	  
 }
