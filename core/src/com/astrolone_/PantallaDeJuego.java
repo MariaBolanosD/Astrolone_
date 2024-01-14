@@ -3,6 +3,7 @@ package com.astrolone_;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
@@ -23,6 +24,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import Menus.PauseMenu;
+import Objetos.Puntuacion;
 import Objetos.jugador.Disparo;
 import Objetos.jugador.Jugador;
 import enemy_logic.Enemies;
@@ -55,7 +57,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 //		this.box2DDebugRenderer = new Box2DDebugRenderer();
 //	}
 
-	class KeyboardProcessor extends InputAdapter {
+	class KeyboardProcessor extends InputAdapter{
 
 		
 		
@@ -206,6 +208,19 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		
 	}
+
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	@Override
+	public void dispose() {
+		System.out.println("se cierra la venatna de juego");
+		Puntuacion p = new Puntuacion(puntuacion, "a");
+		p.guardarPuntuacion();
+		super.dispose();
+	}
+
 	
 	
 	
