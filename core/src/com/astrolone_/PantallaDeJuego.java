@@ -1,6 +1,7 @@
 package com.astrolone_;
 
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -41,6 +43,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
 	private Stage stage;
+	private static final String CONFIG_FILE_PATH = "config.properties";
 
 	private Jugador jugador;
 	private EnemyBatch enemy;
@@ -52,6 +55,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private int puntuacion;
 	private Music backgroundMusic;
 
+	private Sound shootingSound;
 
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -127,14 +131,21 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
-		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav"));
+		game.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav")));
 
 		  // Set music to loop
-        backgroundMusic.setLooping(true);
+        game.getBackgroundMusic().setLooping(true);
 
         // Start playing the music
-        backgroundMusic.play();
+        try {
+            game.getGameProperties().load(Gdx.files.local(CONFIG_FILE_PATH).reader());
+            game.setVolume(Float.parseFloat(game.getGameProperties().getProperty("volume")));
+		} catch (IOException e) {
+            e.printStackTrace();
+        }
 		
+       	game.getBackgroundMusic().play();
+        shootingSound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));
 		
 		
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
@@ -142,7 +153,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.enemy = new EnemyBatch();
 		this.disparos = new ArrayList<>();
 		
-		this.fuentePuntuacion = new BitmapFont(Gdx.files.internal("fuentes/score.fnt"));
+		this.fuentePuntuacion = new BitmapFont(Gdx.files.classpath("fuentes/score.fnt"));
 		puntuacion = 0;
 		
 
@@ -158,6 +169,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 		// registramos el multiplexador de eventos como escuchador
 		Gdx.input.setInputProcessor(multiplexer);
+		
 	}
 
 	private void update() {
@@ -173,6 +185,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
 			esperaDeDisparo=0;
 			puntuacion = puntuacion+10;
+			shootingSound.play();
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
@@ -231,8 +244,11 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		backgroundMusic.stop();
-	    backgroundMusic.dispose();
+		game.getBackgroundMusic().stop();
+		game.getBackgroundMusic().dispose();
+	    if (shootingSound != null) {
+            shootingSound.dispose();
+        }
 		Puntuacion p = new Puntuacion(puntuacion, "a");
 		p.guardarPuntuacion();
 		super.dispose();
