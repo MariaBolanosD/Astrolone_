@@ -31,7 +31,6 @@ public class PauseMenu extends ScreenAdapter{
 	 
 	  private Stage stage;
 	  private Table table;
-	  private Slider volumeSlider; // Added volume slider
 
 	 public PauseMenu(final AstroLone_Juego game)
 	 {
@@ -84,22 +83,6 @@ public class PauseMenu extends ScreenAdapter{
 	     table.row();
 	     table.add(quitMenuButonButton).minWidth(200);
 	     
-	     // Add a slider for volume control
-	        volumeSlider = new Slider(0, 1, 0.1f, false, game.getDefaultSkin());
-	        volumeSlider.setValue(game.getVolume()); // Set initial volume based on game settings
-	        table.row();
-	        table.add(volumeSlider).minWidth(200).padTop(50);
-
-	        volumeSlider.addListener(new ChangeListener() {
-	            @Override
-	            public void changed(ChangeEvent event, Actor actor) {
-	                // Adjust the volume based on the slider value
-	                game.setVolume(volumeSlider.getValue());
-	                game.saveGameProperties();
-	            }
-	        });
-	     
-
 	     exitButton.addListener(new ChangeListener() {
 
 			@Override

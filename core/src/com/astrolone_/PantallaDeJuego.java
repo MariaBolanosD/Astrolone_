@@ -1,6 +1,7 @@
 package com.astrolone_;
 
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -42,6 +43,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
 	private Stage stage;
+	private static final String CONFIG_FILE_PATH = "config.properties";
 
 	private Jugador jugador;
 	private EnemyBatch enemy;
@@ -135,6 +137,12 @@ public class PantallaDeJuego extends ScreenAdapter {
         game.getBackgroundMusic().setLooping(true);
 
         // Start playing the music
+        try {
+            game.getGameProperties().load(Gdx.files.local(CONFIG_FILE_PATH).reader());
+            game.setVolume(Float.parseFloat(game.getGameProperties().getProperty("volume")));
+		} catch (IOException e) {
+            e.printStackTrace();
+        }
 		
        	game.getBackgroundMusic().play();
         shootingSound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));
@@ -161,6 +169,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 		// registramos el multiplexador de eventos como escuchador
 		Gdx.input.setInputProcessor(multiplexer);
+		
 	}
 
 	private void update() {
@@ -235,8 +244,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		backgroundMusic.stop();
-	    backgroundMusic.dispose();
+		game.getBackgroundMusic().stop();
+		game.getBackgroundMusic().dispose();
 	    if (shootingSound != null) {
             shootingSound.dispose();
         }
