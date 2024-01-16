@@ -6,23 +6,32 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+<<<<<<< HEAD
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
+=======
+import javax.swing.WindowConstants;
+>>>>>>> main
 
 public class PuntuacionesSwing extends JFrame{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
 //	private static ArrayList<Puntuacion> puntuaciones; 
 	
+=======
+
+>>>>>>> main
 	public PuntuacionesSwing() {
 		setSize(820,640);
 		setLocationRelativeTo(null);
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
@@ -50,6 +59,12 @@ public class PuntuacionesSwing extends JFrame{
 				dispose();
 			}
 		});
+=======
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+
+
+>>>>>>> main
 	}
-	
+
 }

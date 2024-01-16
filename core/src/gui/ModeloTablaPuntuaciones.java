@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+<<<<<<< HEAD
 import Objetos.Puntuacion;
 import io.GestorFicheros;
 
@@ -19,6 +20,14 @@ public class ModeloTablaPuntuaciones extends AbstractTableModel{
 	
 	public ModeloTablaPuntuaciones() {
 		this.listaPuntuaciones = gF.leerPuntuaciones(); 
+=======
+public class ModeloTablaPuntuaciones {
+	private String[] cabeceras = {"Usuario","Puntuación"};
+	private List<Usuario>listaUsuarios;
+
+	public ModeloTablaPuntuaciones(List<Usuario> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
+>>>>>>> main
 	}
 	@Override
 	public int getColumnCount() {
