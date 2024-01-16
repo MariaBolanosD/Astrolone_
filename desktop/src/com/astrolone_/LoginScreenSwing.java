@@ -20,6 +20,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
 import Objetos.Usuario;
+import db.CargaUsuarios;
 import gui.AdminSwing;
 import gui.PuntuacionesSwing;
 
@@ -36,12 +37,13 @@ public class LoginScreenSwing extends JFrame {
 	
 	private JTextField nombreUsuario = new JTextField(20);
 	private JTextField contrasenya = new JTextField(20);
-	
+	private CargaUsuarios cu = new CargaUsuarios();
 	private AstroLone_Juego game;
 	
 	
 	public LoginScreenSwing(List<Usuario> listaUsuariosRecibida) {
-		final List<Usuario> listaUsuarios = listaUsuariosRecibida;
+		final List<Usuario> listaUsuarios = cu.leerUsuarios("");
+		System.out.println(listaUsuarios);
 		listaUsuarios.add(new Usuario("admin","admin"));
 		listaUsuarios.add(new Usuario("Victor","hola"));
 		setLocationRelativeTo(null);

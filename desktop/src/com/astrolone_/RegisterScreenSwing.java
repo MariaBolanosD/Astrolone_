@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Objetos.Usuario;
+import db.CargaUsuarios;
 
 public class RegisterScreenSwing extends JFrame{
 	
@@ -27,10 +28,9 @@ public class RegisterScreenSwing extends JFrame{
 	private JTextField tfUsuario = new JTextField(15);
 	private JTextField tfContrasenya = new JTextField(15);
 	private JTextField tfConfirma = new JTextField(15);
-	
+	private CargaUsuarios cu = new CargaUsuarios();
 	
 	public RegisterScreenSwing(List<Usuario> listaUsuariosRecibida) {
-		final List<Usuario> listaUsuarios = listaUsuariosRecibida;
 		setTitle("Registra Usuario");
 		setVisible(true);
 		setSize(640,420);
@@ -74,7 +74,7 @@ public class RegisterScreenSwing extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				LoginScreenSwing vent = new LoginScreenSwing(listaUsuarios);
+				LoginScreenSwing vent = new LoginScreenSwing(listaUsuariosRecibida);
 			}
 		});
 		
@@ -82,13 +82,14 @@ public class RegisterScreenSwing extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(listaUsuarios.contains(new Usuario(tfUsuario.getText(),""))) {
+				if(listaUsuariosRecibida.contains(new Usuario(tfUsuario.getText(),""))) {
 					JOptionPane.showConfirmDialog(null, "Ya existe un Usuario con ese nickname elija otro");
 				}else if (!tfContrasenya.getText().equals(tfConfirma.getText())) {
 					JOptionPane.showConfirmDialog(null, "La contraseña introducida ha de ser la misma");
 				} else {
-					listaUsuarios.add(new Usuario(tfUsuario.getText(),tfContrasenya.getText()));
+					listaUsuariosRecibida.add(new Usuario(tfUsuario.getText(),tfContrasenya.getText()));
 					JOptionPane.showConfirmDialog(null, "Te has registrado exitosamente");
+					cu.insertarUsuario(tfUsuario.getText(), tfContrasenya.getText());
 				}
 			}
 		});
@@ -98,8 +99,4 @@ public class RegisterScreenSwing extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) {
-		List<Usuario> listaUsuarios = new ArrayList<>();
-		RegisterScreenSwing vent = new RegisterScreenSwing(listaUsuarios);
-	}
 }
