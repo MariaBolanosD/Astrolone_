@@ -1,5 +1,9 @@
 package com.astrolone_;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
@@ -23,7 +27,8 @@ public class AstroLone_Juego extends Game {
 
 	public static final int DEFAULT_WIDTH = 800;
     public static final int DEFAULT_HEIGHT = 600;
-
+    private Properties gameProperties;
+    private static final String CONFIG_FILE_PATH = "resources/config.properties";
     private boolean fullScreen = false;
 
     private String username;
@@ -37,6 +42,13 @@ public class AstroLone_Juego extends Game {
 
 	@Override
 	public void create() {
+		gameProperties = new Properties();
+        try {
+            gameProperties.load(Gdx.files.internal(CONFIG_FILE_PATH).reader());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
 		this.widthScreen = Gdx.graphics.getWidth();
 		this.heigtScreen = Gdx.graphics.getHeight();
 		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
@@ -51,7 +63,21 @@ public class AstroLone_Juego extends Game {
         this.setScreen(new MenuPrincipal(this));
 
        }
+	
+	public Properties getGameProperties()
+	{
+		return gameProperties;
+	}
 
+
+	public void saveGameProperties() {
+        try (FileOutputStream output = new FileOutputStream(Gdx.files.classpath(CONFIG_FILE_PATH).file())) {
+            gameProperties.store(output, "Game Configuration");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	// Additional method to access the username
     public String getUsername() {
         return username;
@@ -70,7 +96,7 @@ public class AstroLone_Juego extends Game {
 	{
 		return camara;
 	}
-
+	
 	// establece el modo gráfico a ventana completa
     // utilizando la resolución actual del escritorio
     public void setFullscreen() {
