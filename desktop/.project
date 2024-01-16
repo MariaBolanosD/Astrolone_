@@ -20,11 +20,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>assets</name>
-			<type>2</type>
-			<location>E:/alumno/Año2/Cuatri 1/ProyectoProog3/Astrolone_/assets</location>
-		</link>
-	</linkedResources>
 </projectDescription>

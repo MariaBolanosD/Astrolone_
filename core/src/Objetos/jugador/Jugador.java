@@ -2,6 +2,7 @@ package Objetos.jugador;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import Objetos.EntidadEspacial;
 
@@ -18,9 +19,9 @@ public class Jugador extends EntidadEspacial
 
 	
 	
-	public Jugador(loat velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
-		super(largura, altura, cuerpo);
-		this.velocidad = 4f;
+	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
+		super(velocidad, centroX, centroY, ancho, alto, textura);
+		//this.velocidad = 4f;
 		this.vida = 3;
 
 		bucketImage = new Texture(Gdx.files.internal("droplet.png"));

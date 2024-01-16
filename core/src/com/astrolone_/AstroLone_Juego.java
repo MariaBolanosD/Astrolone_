@@ -48,7 +48,7 @@ public class AstroLone_Juego extends Game {
         this.viewport = new StretchViewport(DEFAULT_WIDTH, DEFAULT_HEIGHT, camara);
         
         this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
-        Skin skin2 = getDefaultSkin() ;
+        //Skin skin2 = getDefaultSkin() ;
         //cambiar constructor de patalla de juego
         this.setScreen(new MenuPrincipal(this));
         //this.dispose();
