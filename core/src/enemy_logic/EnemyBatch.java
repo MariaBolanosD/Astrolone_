@@ -13,19 +13,19 @@ public class EnemyBatch {
 	private int enemy_count = 4;
 
 	private int counter = 0;
-	   
+
 	public EnemyBatch()
 	{
-		Enemy = new ArrayList<Enemies>();
+		Enemy = new ArrayList<>();
 		CreateRandomEnemy();
-		
+
 	}
-	
-	
+
+
 	public void Enemy_Generator( float enemy_spawm_Timer)
 	   {
-			
-		   
+
+
 		    for (int i =0; i < enemy_count; i++)
 		    {
 		    	Enemies enem = new Enemies();
@@ -39,37 +39,36 @@ public class EnemyBatch {
 				   counter +=1;
 				   timer = 0;
 			   }
-			  
+
 			 //  System.out.println(timer);
 		   }
-	   }  
-	
+	   }
+
 	  public void CreateRandomEnemy() {
 	      timer += 0.1;
 	      Enemy_Generator(5.0f);
 	     // System.out.println(Enemy.size());
-	      Enemy_RandLocation();   
+	      Enemy_RandLocation();
 	  }
-	  
+
 	  public void Enemy_RandLocation()
 	   {
 		   int posMax_X = 800/2;
 		   int posMin_X = -(800/2);
 		   int posMax_Y = 480/2;
 		   int posMin_Y = -(480/2);
-		   
-		   for(int i = 0 ; i< Enemy.size();i++)
-		   {
+
+		   for (Enemies element : Enemy) {
 			   int randX = (int)Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
 			   int randY = (int)Math.floor(Math.random() * (posMax_Y - posMin_Y + 1) + posMin_Y);
-			   Sprite spr = Enemy.get(i).getSprite_enemy(); spr.setPosition(randX, randY);
-			   Enemy.get(i).setPosX_enemy(randX);
-			   Enemy.get(i).setPosY_enemy(randY);
-			   Enemy.get(i).setSprite_enemy(spr);
-			  
+			   Sprite spr = element.getSprite_enemy(); spr.setPosition(randX, randY);
+			   element.setPosX_enemy(randX);
+			   element.setPosY_enemy(randY);
+			   element.setSprite_enemy(spr);
+
 		   }
 	   }
-	
+
 	  public void dispose()
 	  {
 		  for(Enemies enem : Enemy)
@@ -77,7 +76,7 @@ public class EnemyBatch {
 			 enem.dispose();
 		  }
 	  }
-	  
+
 	  public ArrayList<Enemies> getEnemies()
 	  {
 		  return this.Enemy;

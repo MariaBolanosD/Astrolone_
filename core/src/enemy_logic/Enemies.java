@@ -17,9 +17,9 @@ public class Enemies extends ApplicationAdapter {
 		   public  Enemies()
 		   {
 			   setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
-			    
+
 			      // create a Rectangle to logically represent the bucket
-		
+
 			   setSprite_enemy(new Sprite(getBucketImage()));
 			   getSprite_enemy().setScale(Scale);
 		   }
@@ -28,16 +28,16 @@ public class Enemies extends ApplicationAdapter {
 		   public void create() {
 		      // load the images for the droplet and the bucket, 64x64 pixels each
 		      setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
-    
+
 		      // create a Rectangle to logically represent the bucket
-	
+
 		      setSprite_enemy(new Sprite(getBucketImage()));
 		      getSprite_enemy().setScale(Scale);
 
 
 
 		   }
-		   
+
 		   public void render(SpriteBatch batch) {
 
 		      getSprite_enemy().draw(batch);
@@ -49,7 +49,7 @@ public class Enemies extends ApplicationAdapter {
 
 		   }
 
-	
+
 		   @Override
 		   public void dispose() {
 		      // dispose of all the native resources
@@ -74,8 +74,8 @@ public class Enemies extends ApplicationAdapter {
 		public void setSprite_enemy(Sprite sprite_enemy) {
 			this.sprite_enemy = sprite_enemy;
 		}
-		
-		
+
+
 		public int getPosX_enemy() {
 			return posX;
 		}
@@ -83,7 +83,7 @@ public class Enemies extends ApplicationAdapter {
 		public void setPosX_enemy(int posX) {
 			this.posX = posX;
 		}
-		
+
 		public int getPosY_enemy() {
 			return posY;
 		}

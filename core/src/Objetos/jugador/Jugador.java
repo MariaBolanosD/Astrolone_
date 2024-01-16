@@ -14,12 +14,12 @@ public class Jugador extends EntidadEspacial
 
 	private int vida;
 	private boolean leftMove,rightMove,upMove,downMove;
-		
+
 	private Sprite sprite;
 	private Texture bucketImage;
 
-	
-	
+
+
 	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
 		super(velocidad, centroX, centroY, ancho, alto, textura);
 		//this.velocidad = 4f;
@@ -39,6 +39,7 @@ public class Jugador extends EntidadEspacial
 				posicionX = 0;
 			}
 			
+
 	    }
 	    if (rightMove)
 	    {
@@ -46,6 +47,7 @@ public class Jugador extends EntidadEspacial
 	    	if(posicionX + ancho > AstroLone_Juego.INSTANCE.DEFAULT_WIDTH) {
 	    		posicionX = AstroLone_Juego.INSTANCE.DEFAULT_WIDTH-ancho;
 	    	}
+
 	    }
 	    if(upMove)
 	    {
@@ -61,8 +63,9 @@ public class Jugador extends EntidadEspacial
 	    	if(posicionY < 0) {
 	    		posicionY = 0;
 	    	}
+
 	    }
-		
+
 	}
 
 	public int getVida() {
@@ -104,8 +107,8 @@ public class Jugador extends EntidadEspacial
 	public void setDownMove(boolean downMove) {
 		this.downMove = downMove;
 	}
-	
-	
 
-	
+
+
+
 }
