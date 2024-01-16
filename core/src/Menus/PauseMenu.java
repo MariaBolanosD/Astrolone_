@@ -16,12 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 
+// imports para .properties
 
 public class PauseMenu extends ScreenAdapter{
 
-	
-	 private final AstroLone_Juego game;
-    
+	 private final AstroLone_Juego game;    
 	 
 	  private Stage stage;
 	  private Table table;
@@ -47,8 +46,6 @@ public class PauseMenu extends ScreenAdapter{
 	     table.row();
 	     table.add(textArea).center();
 	     table.row();
-	     
-	     //dkjgad kjasd
 	     
 	     // creamos un widget de tipo botón con el skin cargado anteriormente
 	     // el widget se añade a la tabla con unos tamaños mínimos y con un

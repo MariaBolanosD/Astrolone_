@@ -45,6 +45,24 @@ public class AstroLone_Juego extends Game {
         
         //cambiar constructor de patalla de juego
         this.setScreen(new MenuPrincipal(this));
+        this.dispose();
+        
+		
+	}
+	
+	public void create2() {
+		this.widthScreen = Gdx.graphics.getWidth();
+		this.heigtScreen = Gdx.graphics.getHeight();
+		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
+		
+		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.camara.position.set(camara.viewportWidth/2, camara.viewportHeight/2, 0);
+        this.viewport = new StretchViewport(camara.viewportWidth, camara.viewportHeight, camara);
+        
+        this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
+        
+        //cambiar constructor de patalla de juego
+        this.setScreen(new MenuPrincipal(this));        
 		
 	}
 	

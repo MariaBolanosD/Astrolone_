@@ -5,21 +5,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.ScreenAdapter;import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import Menus.PauseMenu;
 import Objetos.jugador.Jugador;
-import Objetos.jugador.Jugador.Direction;
-import ayudas.Constantes;
 import enemy_logic.Enemies;
 import enemy_logic.EnemyBatch;
 
@@ -106,19 +103,21 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	public PantallaDeJuego(AstroLone_Juego game) {		
 		this.game = game;
-		
+		this.enemy = new EnemyBatch();
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(20, 20, mundo.createBody(bDef));
-		this.enemy = new EnemyBatch();
+		//this.enemy = new EnemyBatch();
 
 		
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
 		stage = new Stage(game.getViewport());
+		
+		//enemy.Enemy_Generator(3);
 		
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
