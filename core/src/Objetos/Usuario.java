@@ -42,5 +42,10 @@ public class Usuario {
 		// TODO Auto-generated method stub
 		return this.nombreUsuario.hashCode();
 	}
+	
+	@Override
+	public String toString() {
+		return this.nombreUsuario + "|"+ this.contrasenyaUsuario;
+	}
 
 }
