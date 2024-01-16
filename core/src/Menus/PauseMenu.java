@@ -4,7 +4,6 @@ import com.astrolone_.AstroLone_Juego;
 import com.astrolone_.MenuPrincipal;
 import com.astrolone_.PantallaDeJuego;
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -20,33 +19,33 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PauseMenu extends ScreenAdapter{
 
-	 private final AstroLone_Juego game;    
-	 
+	 private final AstroLone_Juego game;
+
 	  private Stage stage;
 	  private Table table;
-	 
-	 public PauseMenu(AstroLone_Juego game) 
+
+	 public PauseMenu(AstroLone_Juego game)
 	 {
 		 this.game = game;
-	        
+
 	     // se hace uso del grafo de escena
 	     // para establecer los widgets
 	     stage = new Stage(game.getViewport());
 	     Gdx.input.setInputProcessor(stage);
-	        
+
 	     // la distribución de los widgets en la pantalla se van a
 	     // distribuir utilizando una tabla que ocupa todo el espacio
 	     table = new Table();
 	     table.setFillParent(true);
-	        
+
 	     // añadimos la tabla al grafo de escena
 	     stage.addActor(table);
-	     
+
 	     final Window textArea = new Window("Menu Pausa", game.getDefaultSkin());
 	     table.row();
 	     table.add(textArea).center();
 	     table.row();
-	     
+
 	     // creamos un widget de tipo botón con el skin cargado anteriormente
 	     // el widget se añade a la tabla con unos tamaños mínimos y con un
 	     // espacio (padding) superior e inferior para situarlo un poco
@@ -55,45 +54,48 @@ public class PauseMenu extends ScreenAdapter{
 
 	     // establecemos el check box del modo gráfico al modo actual
 	     fullScreenCheck.setChecked(game.isFullScreen());
-	  
+
 	     // añadimos un segundo botón para volver al menú principal
 	     final TextButton exitButton = new TextButton("Return", game.getDefaultSkin());
 	     table.row();
 	     table.add(exitButton).minWidth(200);
-	     
+
 	     // añadimos un segundo botón para volver al menú principal
 	     final TextButton mainMenuButonButton = new TextButton("Main Menu", game.getDefaultSkin());
 	     table.row();
 	     table.add(mainMenuButonButton).minWidth(200);
-	     
-	     
+
+
 	     exitButton.addListener(new ChangeListener() {
 
+			@Override
 			public void changed (ChangeEvent event, Actor actor) {
 				PauseMenu.this.dispose();
 				PauseMenu.this.game.setScreen(new PantallaDeJuego(PauseMenu.this.game));
 
-             
+
 			}
-          
+
 		});
-	     
+
 	     mainMenuButonButton.addListener(new ChangeListener() {
 
+				@Override
 				public void changed (ChangeEvent event, Actor actor) {
 					PauseMenu.this.dispose();
 					PauseMenu.this.game.setScreen(new MenuPrincipal(PauseMenu.this.game));
 
-	             
+
 				}
-	          
+
 			});
-	     
+
 	     fullScreenCheck.addListener(new ChangeListener() {
-	    	 
-	    	 public void changed (ChangeEvent event, Actor actor) {
-	    		 
-	    	 
+
+	    	 @Override
+			public void changed (ChangeEvent event, Actor actor) {
+
+
 	    		 if (fullScreenCheck.isChecked() && !PauseMenu.this.game.isFullScreen()) {
 	    			 PauseMenu.this.game.setFullscreen();
 	    		 }
@@ -102,11 +104,11 @@ public class PauseMenu extends ScreenAdapter{
 	    			 PauseMenu.this.game.setWindowed();
 	    		 }
 	    	 }
-      
+
 	     });
-	    
+
 	 }
-	 
+
 	// este método actualiza el viewport cuando se ajusta
 	    // el tamaño de la ventana
 	    @Override
@@ -125,12 +127,12 @@ public class PauseMenu extends ScreenAdapter{
 	    }
 
 	    // método para destruir los recursos cargados
-	    // para esta pantalla. 
+	    // para esta pantalla.
 	    @Override
 	    public void dispose() {
 	        stage.dispose();
 	    }
-    
-    
-	
+
+
+
 }

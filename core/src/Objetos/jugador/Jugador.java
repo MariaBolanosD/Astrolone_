@@ -13,12 +13,12 @@ public class Jugador extends EntidadEspacial
 
 	private int vida;
 	private boolean leftMove,rightMove,upMove,downMove;
-		
+
 	private Sprite sprite;
 	private Texture bucketImage;
 
-	
-	
+
+
 	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
 		super(velocidad, centroX, centroY, ancho, alto, textura);
 		//this.velocidad = 4f;
@@ -33,13 +33,13 @@ public class Jugador extends EntidadEspacial
 	public void update() {
 		if (leftMove)
 	    {
-			setPosicionX(posicionX -200 * Gdx.graphics.getDeltaTime());;
-			
+			setPosicionX(posicionX -200 * Gdx.graphics.getDeltaTime());
+
 	    }
 	    if (rightMove)
 	    {
 	    	setPosicionX(posicionX + 200 * Gdx.graphics.getDeltaTime());
-	    	
+
 	    }
 	    if(upMove)
 	    {
@@ -49,9 +49,9 @@ public class Jugador extends EntidadEspacial
 	    if(downMove)
 	    {
 	    	setPosicionY(posicionY - 200 * Gdx.graphics.getDeltaTime());
-	    	
+
 	    }
-		
+
 	}
 
 	public int getVida() {
@@ -93,8 +93,8 @@ public class Jugador extends EntidadEspacial
 	public void setDownMove(boolean downMove) {
 		this.downMove = downMove;
 	}
-	
-	
 
-	
+
+
+
 }
