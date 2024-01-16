@@ -1,5 +1,8 @@
 package com.astrolone_;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
@@ -25,10 +28,13 @@ public class AstroLone_Juego extends Game {
     
     private boolean fullScreen = false;
     
+    private String username;
+    
     private Skin skin;
 	
-	public AstroLone_Juego() {
+	public AstroLone_Juego(String username) {
 		INSTANCE=this;
+		this.username = username;
 	}
 	
 	@Override
@@ -38,33 +44,22 @@ public class AstroLone_Juego extends Game {
 		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
 		
 		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.camara.position.set(camara.viewportWidth/2, camara.viewportHeight/2, 0);
-        this.viewport = new StretchViewport(camara.viewportWidth, camara.viewportHeight, camara);
+		this.camara.position.set(DEFAULT_WIDTH/2f, DEFAULT_HEIGHT/2, 0);
+        this.viewport = new StretchViewport(DEFAULT_WIDTH, DEFAULT_HEIGHT, camara);
         
         this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
-        
+        Skin skin2 = getDefaultSkin() ;
         //cambiar constructor de patalla de juego
         this.setScreen(new MenuPrincipal(this));
-        this.dispose();
+        //this.dispose();
         
 		
 	}
 	
-	public void create2() {
-		this.widthScreen = Gdx.graphics.getWidth();
-		this.heigtScreen = Gdx.graphics.getHeight();
-		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
-		
-		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.camara.position.set(camara.viewportWidth/2, camara.viewportHeight/2, 0);
-        this.viewport = new StretchViewport(camara.viewportWidth, camara.viewportHeight, camara);
-        
-        this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
-        
-        //cambiar constructor de patalla de juego
-        this.setScreen(new MenuPrincipal(this));        
-		
-	}
+	// Additional method to access the username
+    public String getUsername() {
+        return username;
+    }
 	
 	public Viewport getViewport() {
 		// TODO Auto-generated method stub
@@ -115,4 +110,6 @@ public class AstroLone_Juego extends Game {
         skin.dispose();
     }
 
+    
+    
 }

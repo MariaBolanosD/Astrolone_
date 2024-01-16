@@ -27,6 +27,8 @@ public class Jugador extends EntidadEspacial{
 	
 	private Sprite sprite;
 	private Texture bucketImage;
+
+	
 	
 	public Jugador(float largura, float altura, Body cuerpo) {
 		super(largura, altura, cuerpo);

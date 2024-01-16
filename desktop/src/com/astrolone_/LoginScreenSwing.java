@@ -159,7 +159,7 @@ public class LoginScreenSwing extends JFrame {
         config.setTitle("astrolone_");
 
         //game.setScreen(new MenuPrincipal(game));
-        new Lwjgl3Application(new AstroLone_Juego(), config);
+        new Lwjgl3Application(new AstroLone_Juego(nombreUsuario.getText()), config);
         //AstroLone_Juego game = new AstroLone_Juego();
         //game.create();
         //game.render();
