@@ -54,11 +54,11 @@ public class EnemyBatch {
 	  }
 
 	  public void Enemy_RandLocation()
-	   {
-		   int posMax_X = AstroLone_Juego.DEFAULT_WIDTH/2;
-		   int posMin_X = -(AstroLone_Juego.DEFAULT_WIDTH/2);
-		   int posMax_Y = AstroLone_Juego.DEFAULT_HEIGHT/2;
-		   int posMin_Y = -(AstroLone_Juego.DEFAULT_HEIGHT/2);
+	  {
+		   int posMax_X = Gdx.graphics.getWidth()/2;
+		   int posMin_X = -(Gdx.graphics.getWidth()/2);
+		   int posMax_Y = Gdx.graphics.getHeight()/2;
+		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
 
 		   for (Enemies element : Enemy) {
 			   int randX = (int)Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
@@ -72,10 +72,10 @@ public class EnemyBatch {
 	   }
 	  
 	  public Enemies Single_Enemy_RandLocation() {
-		    int posMax_X = 800 / 2;
-		    int posMin_X = -(800 / 2);
-		    int posMax_Y = 480 / 2;
-		    int posMin_Y = -(480 / 2);
+		  int posMax_X = Gdx.graphics.getWidth()/2;
+		   int posMin_X = -(Gdx.graphics.getWidth()/2);
+		   int posMax_Y = Gdx.graphics.getHeight()/2;
+		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
 
 		    Enemies element = new Enemies(); // Create a new enemy instance
 
@@ -91,10 +91,10 @@ public class EnemyBatch {
 		}
 
 	  public void updateSingleEnemyPosition(Enemies enemy) {
-		    int posMax_X = 800 / 2;
-		    int posMin_X = -(800 / 2);
-		    int posMax_Y = 480 / 2;
-		    int posMin_Y = -(480 / 2);
+		  int posMax_X = Gdx.graphics.getWidth()/2;
+		   int posMin_X = -(Gdx.graphics.getWidth()/2);
+		   int posMax_Y = Gdx.graphics.getHeight()/2;
+		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
 
 		    int randX = (int) Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
 		    int randY = (int) Math.floor(Math.random() * (posMax_Y - posMin_Y + 1) + posMin_Y);
