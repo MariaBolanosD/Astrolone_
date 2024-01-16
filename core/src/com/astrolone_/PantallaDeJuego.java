@@ -132,31 +132,98 @@ public class PantallaDeJuego extends ScreenAdapter {
 		// registramos el multiplexador de eventos como escuchador
 		Gdx.input.setInputProcessor(multiplexer);
 	}
-
+	
+	
 	private void update() {
-		mundo.step(1/60, 6, 2);
-		jugador.update();
+	    mundo.step(1 / 60, 6, 2);
+	    jugador.update();
 
-//		for(Enemies enemi:enemy)
-//		{
-//			enemi.update();
-//		}
-		batch.setProjectionMatrix(game.getCamera().combined);
-		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
-			esperaDeDisparo=0;
-			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
-		}
-		
-		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
-		for(Disparo disparo : disparos) {
-			disparo.update(Gdx.graphics.getDeltaTime());
-			if (disparo.borrar) {
-				disparosBorrar.add(disparo);
-			}
-		}
-		disparos.removeAll(disparosBorrar);
+	    // Run game logic in a separate thread
+	    Thread gameLogicThread = new Thread(() -> {
+	        updateGameLogic();
+	        Gdx.app.postRunnable(() -> {
+	            batch.setProjectionMatrix(game.getCamera().combined);
+	        });
+	    });
+	    gameLogicThread.start();
+
+	   
+
+	
 	}
+
+	private void updateGameLogic() {
+	    // Perform any expensive calculations or game logic here
+	    // For example:
+	    // updateEnemies();
+	    // checkCollisions();
+	    
+	    if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO <= esperaDeDisparo) {
+	        esperaDeDisparo = 0;
+	        Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+	        disparos.add(new Disparo(jugador.getPosicionX(), jugador.getPosicionY(), ldCoordinates.x, ldCoordinates.y));
+	    }
+
+	    ArrayList<Disparo> disparosBorrar = new ArrayList<>();
+	    for (Disparo disparo : disparos) {
+	        disparo.update(Gdx.graphics.getDeltaTime());
+	        if (disparo.borrar) {
+	            disparosBorrar.add(disparo);
+	        }
+	    }
+	    disparos.removeAll(disparosBorrar);
+	}
+
+	  @Override
+	    public void render(float delta) {
+	        // Update game logic
+	        mundo.step(1 / 60, 6, 2);
+	        jugador.update();
+
+	        // Handle input
+	        handleInput();
+
+	        // Perform any other game logic or calculations
+
+	        // Render
+	        esperaDeDisparo += delta;
+	        Gdx.gl.glClearColor(0, 0, 0, 0);
+	        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+	        batch.setProjectionMatrix(game.getCamera().combined);
+
+	        batch.begin();
+	        // Render objects
+	        jugador.draw(batch);
+	        for (Disparo disparo : disparos) {
+	            disparo.render(batch);
+	        }
+
+	        for (Enemies en : enemy.getEnemies()) {
+	            en.render(batch);
+	        }
+
+	        batch.end();
+	    }
+
+	    private void handleInput() {
+	        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO <= esperaDeDisparo) {
+	            esperaDeDisparo = 0;
+	            Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+	            disparos.add(new Disparo(jugador.getPosicionX(), jugador.getPosicionY(), ldCoordinates.x, ldCoordinates.y));
+	        }
+
+	        ArrayList<Disparo> disparosBorrar = new ArrayList<>();
+	        for (Disparo disparo : disparos) {
+	            disparo.update(Gdx.graphics.getDeltaTime());
+	            if (disparo.borrar) {
+	                disparosBorrar.add(disparo);
+	            }
+	        }
+	        disparos.removeAll(disparosBorrar);
+	    }
+
+
 	
 	private void updateCamara() {
 		game.getCamera().position.set(new Vector3(0,0,0));
@@ -164,33 +231,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 	}
 	
 	
-	@Override
-	public void render(float delta) {
-		this.update();
-		esperaDeDisparo+=delta;
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		//Render de objetos
-		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
-		jugador.draw(batch);
-		for (Disparo disparo : disparos) {
-			disparo.render(batch);
-		}
-		
-		for(Enemies en : enemy.getEnemies())
-		{
-			en.render(batch);
-			//System.out.println(2);
-			//System.out.println( en.getSprite_enemy().getX());
-		}
-		
-		
-		batch.end();
-		
-		
-	}
+	
+
+   
 	
 	
 	

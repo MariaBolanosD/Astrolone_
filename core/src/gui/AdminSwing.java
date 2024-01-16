@@ -37,7 +37,7 @@ public class AdminSwing extends JFrame{
 					boolean hasFocus, int row, int column) {
 					
 				setText(value.toString());
-				if( value.toString().startsWith(busqueda.getText()) && !busqueda.getText().isBlank()) {
+				if( value.toString().startsWith(busqueda.getText()) && !busqueda.getText().isEmpty()) {
 					this.setBackground(Color.CYAN);
 				}else {
 					this.setBackground(Color.WHITE);
