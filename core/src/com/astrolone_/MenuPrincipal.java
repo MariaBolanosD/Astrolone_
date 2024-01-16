@@ -14,10 +14,6 @@ public class MenuPrincipal extends ScreenAdapter{
 
 	 private final AstroLone_Juego game;
 	
-	    
-	 
-
-
 	  private Stage stage;
 	  private Table table;
 

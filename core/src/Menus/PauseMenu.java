@@ -108,6 +108,7 @@ public class PauseMenu extends ScreenAdapter{
 				@Override
 				public void changed (ChangeEvent event, Actor actor) {
 					PauseMenu.this.dispose();
+					Gdx.app.exit();
 				}
 
 			});

@@ -142,7 +142,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.enemy = new EnemyBatch();
 		this.disparos = new ArrayList<>();
 		
-		this.fuentePuntuacion = new BitmapFont(Gdx.files.internal("fuentes/score.fnt"));
+		this.fuentePuntuacion = new BitmapFont(Gdx.files.classpath("fuentes/score.fnt"));
 		puntuacion = 0;
 		
 

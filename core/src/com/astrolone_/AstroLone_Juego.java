@@ -28,7 +28,7 @@ public class AstroLone_Juego extends Game {
 	public static final int DEFAULT_WIDTH = 800;
     public static final int DEFAULT_HEIGHT = 600;
     private Properties gameProperties;
-    private static final String CONFIG_FILE_PATH = "resources/config.properties";
+    private static final String CONFIG_FILE_PATH = "config.properties";
     private boolean fullScreen = false;
 
     private String username;
@@ -44,7 +44,7 @@ public class AstroLone_Juego extends Game {
 	public void create() {
 		gameProperties = new Properties();
         try {
-            gameProperties.load(Gdx.files.internal(CONFIG_FILE_PATH).reader());
+            gameProperties.load(Gdx.files.local(CONFIG_FILE_PATH).reader());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +71,8 @@ public class AstroLone_Juego extends Game {
 
 
 	public void saveGameProperties() {
-        try (FileOutputStream output = new FileOutputStream(Gdx.files.classpath(CONFIG_FILE_PATH).file())) {
+		Gdx.app.log("FILEPATH", Gdx.files.local(CONFIG_FILE_PATH).toString());
+        try (FileOutputStream output = new FileOutputStream(Gdx.files.internal(CONFIG_FILE_PATH).file())) {
             gameProperties.store(output, "Game Configuration");
         } catch (IOException e) {
             e.printStackTrace();
