@@ -74,7 +74,7 @@ public class RegisterScreenSwing extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				LoginScreenSwing vent = new LoginScreenSwing(listaUsuariosRecibida);
+				new LoginScreenSwing(listaUsuariosRecibida);
 			}
 		});
 		

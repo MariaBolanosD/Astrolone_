@@ -79,7 +79,7 @@ public class MenuPrincipal extends ScreenAdapter{
 		    // para esta pantalla.
 		    @Override
 		    public void dispose() {
-		    	System.out.println("se cierra");
+		    	
 		        stage.dispose();
 		    }
 

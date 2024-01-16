@@ -3,9 +3,9 @@ package com.astrolone_;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Set;
 
-import javax.sound.midi.VoiceStatus;
+
+
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -18,14 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import Menus.PauseMenu;
-import Objetos.Puntuacion;
-
 
 public class AstroLone_Juego extends Game {
 
 	public static AstroLone_Juego INSTANCE;
-	private int widthScreen, heigtScreen;
+
 	private OrthographicCamera camara;
 	private Viewport viewport;
 
@@ -53,9 +50,7 @@ public class AstroLone_Juego extends Game {
             e.printStackTrace();
         }
 		
-		this.widthScreen = Gdx.graphics.getWidth();
-		this.heigtScreen = Gdx.graphics.getHeight();
-		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
+		
 
 		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		this.camara.position.set(DEFAULT_WIDTH/2f, DEFAULT_HEIGHT/2, 0);

@@ -32,7 +32,7 @@ public class PuntuacionesSwing extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
-		System.out.println(puntuaciones);
+		
 		
 		JButton bVolver = new JButton("Volver");
 		JButton bBuscar = new JButton("Buscar");

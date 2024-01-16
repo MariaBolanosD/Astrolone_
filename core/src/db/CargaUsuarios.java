@@ -57,26 +57,11 @@ public class CargaUsuarios {
 				e.printStackTrace();
 			}
 		}
-//		String sql = "create TABLE usuario (nick VARCHAR(20) not null,contraseña VARCHAR(20), PRIMARY KEY(nick)) ";
-//		try{
-//			stmtBBDD.executeQuery(sql);
-//		}catch(SQLException e ) {
-//			e.printStackTrace();
-//			System.out.println("Error al crear la tabla usuario");
-//		}
-//		sql = "CREATE TABLE puntuacion (nick VARCHAR(20) not null, puntuacion INTEGER, fecha VARCHAR(20), PRIMARY KEY(nick))";
-//		try {
-//			stmtBBDD.executeQuery(sql);
-//		}catch(SQLException e )
-//		{
-//			e.printStackTrace();
-//			System.out.println("Error al crear la tabla puntuacion");
-//		}
 	}
 	
 	public static Statement crearStatement() {
 		if(stmtBBDD!=null) {
-			System.out.println("No es nulo");
+			
 			return stmtBBDD;
 		}
 		
@@ -84,12 +69,12 @@ public class CargaUsuarios {
 			return conexionBBDD.createStatement();
 		}catch(SQLException e ) {
 			e.printStackTrace();
-			System.out.println("no es null");
 		}catch(NullPointerException e) {
-			System.out.println("es nulo");
+			
+			e.printStackTrace();
 			
 		}
-			System.out.println("Tampoco");
+			
 				return stmtBBDD;
 	}
 	
@@ -99,8 +84,8 @@ public class CargaUsuarios {
 		}
 		ArrayList<Usuario> puntuaciones = new ArrayList<>();
 		crearStatement();
-		Path p = Paths.get("");
-		System.out.println(p.toAbsolutePath());
+		
+		
 		
 		try {
 			ResultSet rs = stmtBBDD.executeQuery("SELECT * FROM usuario" + condicion);

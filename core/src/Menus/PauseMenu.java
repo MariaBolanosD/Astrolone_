@@ -1,8 +1,5 @@
 package Menus;
 
-import java.io.IOException;
-import java.util.Properties;
-
 import com.astrolone_.AstroLone_Juego;
 import com.astrolone_.MenuPrincipal;
 import com.astrolone_.PantallaDeJuego;
@@ -11,7 +8,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -19,14 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 
-// imports para .properties
+
 
 public class PauseMenu extends ScreenAdapter{
 
 	 private final AstroLone_Juego game;
-	// private final Properties properties;
-
-	 //private static final String CONFIG_FILE_PATH = "resources/config.properties";
 	 private CheckBox fullscreenCheckBox;
 	 
 	  private Stage stage;

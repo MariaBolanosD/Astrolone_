@@ -13,11 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.astrolone_.AstroLone_Juego;
-import com.astrolone_.MenuPrincipal;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.scenes.scene2d.Action;
 
 import Objetos.Usuario;
 import db.CargaUsuarios;
@@ -38,12 +35,12 @@ public class LoginScreenSwing extends JFrame {
 	private JTextField nombreUsuario = new JTextField(20);
 	private JTextField contrasenya = new JTextField(20);
 	private CargaUsuarios cu = new CargaUsuarios();
-	private AstroLone_Juego game;
+
 	
 	
 	public LoginScreenSwing(List<Usuario> listaUsuariosRecibida) {
 		final List<Usuario> listaUsuarios = cu.leerUsuarios("");
-		System.out.println(listaUsuarios);
+		
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("ASTROLONE");
@@ -97,8 +94,7 @@ public class LoginScreenSwing extends JFrame {
 						new AdminSwing(listaUsuarios);
 					}else if(listaUsuarios.get(listaUsuarios.indexOf(new Usuario(nombreUsuario.getText(),""))).getContrasenyaUsuario().equals(contrasenya.getText()))
 					{
-						//game = new AstroLone_Juego();
-						//game.getScreen().show();
+						
 						
 						JOptionPane.showMessageDialog(null, "Has iniciado sesion correctamente");
 						dispose();
@@ -126,28 +122,11 @@ public class LoginScreenSwing extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new PuntuacionesSwing();
 				
 			}
 		});
-//		nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
-//			
-//			@Override
-//			public void removeUpdate(DocumentEvent e) {
-//				ajustarTamanyoTexto(nombreUsuario);
-//			}
-//			
-//			@Override
-//			public void insertUpdate(DocumentEvent e) {
-//				ajustarTamanyoTexto(nombreUsuario);
-//			}
-//			
-//			@Override
-//			public void changedUpdate(DocumentEvent e) {
-//				ajustarTamanyoTexto(nombreUsuario);
-//			}
-//		});		
+	
 	}
 	
 	public static void ajustarTamanyoTexto(JTextField campo) {
@@ -160,20 +139,17 @@ public class LoginScreenSwing extends JFrame {
 	
 	public static void main(String[] args) {
 		List<Usuario> lista = new ArrayList<>();
-		LoginScreenSwing vent = new LoginScreenSwing(lista);
+		new LoginScreenSwing(lista);
 	}
 	
 	private void startLibGDXGame() {
-        // Create LibGDX application instance and set the game screen
+        
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setForegroundFPS(60);
         config.setTitle("astrolone_");
 
-        //game.setScreen(new MenuPrincipal(game));
         new Lwjgl3Application(new AstroLone_Juego(nombreUsuario.getText()), config);
-        //AstroLone_Juego game = new AstroLone_Juego();
-        //game.create();
-        //game.render();
+    
     }
 	
 	

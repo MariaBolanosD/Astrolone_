@@ -95,7 +95,7 @@ public class AdminSwing extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Buscando");
+				
 				repaint();
 			}
 		});

@@ -162,7 +162,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 		stage = new Stage(game.getViewport());
 
-		//enemy.Enemy_Generator(3);
+		
 
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
@@ -225,10 +225,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		enemigos.removeAll(enemigosBorrar);
 	}
 
-	private void updateCamara() {
-		game.getCamera().position.set(new Vector3(0,0,0));
-		game.getCamera().update();
-	}
+
 
 
 	@Override
@@ -240,9 +237,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 		batch.begin();
 		//Render de objetos
-		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
+		
 		GlyphLayout puntuacionLayout = new GlyphLayout(fuentePuntuacion, ""+puntuacion);
-		fuentePuntuacion.draw(batch, puntuacionLayout, AstroLone_Juego.INSTANCE.DEFAULT_WIDTH-puntuacionLayout.width - 10, AstroLone_Juego.INSTANCE.DEFAULT_HEIGHT-puntuacionLayout.height);
+		fuentePuntuacion.draw(batch, puntuacionLayout, AstroLone_Juego.DEFAULT_WIDTH-puntuacionLayout.width - 10, AstroLone_Juego.DEFAULT_HEIGHT-puntuacionLayout.height);
 		jugador.draw(batch);
 		for (Disparo disparo : disparos) {
 			disparo.render(batch);
@@ -251,8 +248,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		for(Enemies en : enemy.getEnemies())
 		{
 			en.render(batch);
-			//System.out.println(2);
-			//System.out.println( en.getSprite_enemy().getX());
+			
 		}
 
 

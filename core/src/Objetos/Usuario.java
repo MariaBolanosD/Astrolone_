@@ -28,7 +28,7 @@ public class Usuario {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
+		
 		if(obj instanceof Usuario) {
 			Usuario nuevo = (Usuario) obj;
 			if(nuevo.getNombreUsuario().equals(this.getNombreUsuario())) {
