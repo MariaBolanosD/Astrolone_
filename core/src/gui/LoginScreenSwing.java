@@ -1,5 +1,4 @@
 package gui;
-import com.astrolone_.AstroLone;
 import java.awt.BorderLayout;
 
 import java.awt.GridLayout;

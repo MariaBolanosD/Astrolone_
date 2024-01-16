@@ -10,19 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import Menus.PauseMenu;
-import Objetos.Puntuacion;
+
 
 
 public class AstroLone_Juego extends Game {
 
 	public static AstroLone_Juego INSTANCE;
-	private int widthScreen, heigtScreen;
 	private OrthographicCamera camara;
 	private Viewport viewport;
 	
-	public static final int DEFAULT_WIDTH = 800;
-    public static final int DEFAULT_HEIGHT = 600;
+	public final int DEFAULT_WIDTH = 800;
+    public final int DEFAULT_HEIGHT = 600;
     
     private boolean fullScreen = false;
     
@@ -34,8 +32,7 @@ public class AstroLone_Juego extends Game {
 	
 	@Override
 	public void create() {
-		this.widthScreen = Gdx.graphics.getWidth();
-		this.heigtScreen = Gdx.graphics.getHeight();
+		
 		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
 		
 		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);

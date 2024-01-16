@@ -1,9 +1,8 @@
 package com.astrolone_;
 
-import java.awt.Font;
+
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
@@ -13,13 +12,11 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -35,7 +32,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	//private OrthographicCamera camara;
 	private SpriteBatch batch;
 	private World mundo;
-	private Box2DDebugRenderer box2DDebugRenderer;
+	
 	
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
@@ -50,12 +47,6 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private BitmapFont fuentePuntuacion;
 	private int puntuacion;
 	
-//	public PantallaDeJuego(OrthographicCamera camara) {
-//		this.camara = camara;
-//		this.batch = new SpriteBatch();
-//		this.mundo = new World(new Vector2(0, 0), false);
-//		this.box2DDebugRenderer = new Box2DDebugRenderer();
-//	}
 
 	class KeyboardProcessor extends InputAdapter{
 
@@ -122,7 +113,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
-		this.box2DDebugRenderer = new Box2DDebugRenderer();
+		
 
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("naveJugador.png")));
@@ -173,10 +164,6 @@ public class PantallaDeJuego extends ScreenAdapter {
 		//Despues de actualizar todo, mirar si hay colisiones 
 	}
 	
-	private void updateCamara() {
-		game.getCamera().position.set(new Vector3(0,0,0));
-		game.getCamera().update();
-	}
 	
 	
 	@Override

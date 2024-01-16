@@ -1,7 +1,7 @@
 package com.astrolone_;
 import java.util.ArrayList;
 
-import com.astrolone_.Drop;
+
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
@@ -24,9 +24,7 @@ public class DesktopLauncher {
 			new Lwjgl3Application(new AstroLone_Juego(), config);
 	
 			
-			Drop drop = new Drop();
-			drop.create();
-			drop.render();
+			
 //		}
 	}
 }
