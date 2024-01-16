@@ -86,7 +86,6 @@ public class Puntuacion {
 		return nickJugador+";"+puntuacion+";"+fecha;
 	}
 
-
 		
 	
 

@@ -1,10 +1,15 @@
 package io;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 
@@ -30,5 +35,38 @@ public class GestorFicheros {
 		}
 		
 	}
+	
+	public ArrayList<Puntuacion> leerPuntuaciones(){
+		Path path = Paths.get("");
+		ArrayList<Puntuacion> puntuaciones = new ArrayList<>();
+		File archivo = new File(path+"puntuaciones.csv");
+		try{
+			FileReader fr = new FileReader(archivo);
+			BufferedReader bf = new BufferedReader(fr);
+			try {
+				
+				String linea = bf.readLine();
+				while(null!=linea && linea!="") {
+					String[] campos = linea.split(";");
+					puntuaciones.add(new Puntuacion((int) Integer.valueOf(campos[1]),campos[0],campos[2]));
+					linea = bf.readLine();
+				}
+				
+				return puntuaciones;
+			}catch(IOException e) {
+				e.printStackTrace();
+				return puntuaciones;
+			}catch(NullPointerException e) {
+				System.out.println("NullPointerException");
+				return puntuaciones;
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
 	
 }

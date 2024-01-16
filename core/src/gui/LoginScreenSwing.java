@@ -103,6 +103,15 @@ public class LoginScreenSwing extends JFrame {
 				 new RegisterScreenSwing(listaUsuarios);
 			}
 		});
+		
+		botonPuntuaciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				PuntuacionesSwing ventana = new PuntuacionesSwing();
+			}
+		});
 //		nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
 //			
 //			@Override
