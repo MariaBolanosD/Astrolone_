@@ -139,7 +139,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
         // Start playing the music
         try {
-            game.getGameProperties().load(Gdx.files.local(CONFIG_FILE_PATH).reader());
+            game.getGameProperties().load(Gdx.files.internal(CONFIG_FILE_PATH).reader());
             game.setVolume(Float.parseFloat(game.getGameProperties().getProperty("volume")));
 		} catch (IOException e) {
             e.printStackTrace();
@@ -182,7 +182,6 @@ public class PantallaDeJuego extends ScreenAdapter {
 		batch.setProjectionMatrix(game.getCamera().combined);
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
 			esperaDeDisparo=0;
-			puntuacion = puntuacion+10;
 			shootingSound.play();
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
@@ -214,7 +213,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 			for(Enemies e : enemigos) {
 				if(d.getReac().colisionAncho(e.getReac())) {
 					d.borrar = true;
-					e.setBorrado(true);
+					enemy.updateSingleEnemyPosition(e);
 					puntuacion = puntuacion+100;
 				}
 				
@@ -273,8 +272,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 	    if (shootingSound != null) {
             shootingSound.dispose();
         }
-		Puntuacion p = new Puntuacion(puntuacion, "a");
+		Puntuacion p = new Puntuacion(puntuacion, AstroLone_Juego.INSTANCE.getUsername());
 		p.guardarPuntuacion();
+		Gdx.app.log(SCREEN_NAME, "Se a guardado la puntuacion");
 		super.dispose();
 	}
 

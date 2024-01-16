@@ -24,7 +24,7 @@ public class GestorFicheros {
 			System.out.println(path.toAbsolutePath());
 			
 			
-			FileWriter fileW = new FileWriter(path+"puntuaciones.csv",true);
+			FileWriter fileW = new FileWriter(path+"resources/puntuaciones.csv",true);
 			BufferedWriter bF = new BufferedWriter(fileW);
 			fileW.write(p.toString()+"\n");
 			fileW.close();

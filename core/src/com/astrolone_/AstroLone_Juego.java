@@ -48,7 +48,7 @@ public class AstroLone_Juego extends Game {
 	public void create() {
 		gameProperties = new Properties();
         try {
-            gameProperties.load(Gdx.files.local(CONFIG_FILE_PATH).reader());
+            gameProperties.load(Gdx.files.internal(CONFIG_FILE_PATH).reader());
         } catch (IOException e) {
             e.printStackTrace();
         }
