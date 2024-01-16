@@ -19,6 +19,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.TableCellRenderer;
 
 import Objetos.Usuario;
+import db.CargaUsuarios;
 
 public class AdminSwing extends JFrame{
 
@@ -27,6 +28,7 @@ public class AdminSwing extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField busqueda = new JTextField(10);
+	private CargaUsuarios cu = new CargaUsuarios();
 	public AdminSwing(List<Usuario> listaUsuarios) {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -61,6 +63,8 @@ public class AdminSwing extends JFrame{
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		JButton cerrar = new JButton("Cerrar");
 		JButton buscar = new JButton("Buscar");
+		JButton resetPuntuaciones = new JButton("Reset de Puntuaciones");
+		JButton bBorrarUsuarios = new JButton("Borrar Usuarios");
 		JPanel pInferior = new JPanel();
 
 		JPanel pIzquierdo = new JPanel();
@@ -72,6 +76,7 @@ public class AdminSwing extends JFrame{
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		pInferior.add(cerrar);
 		pInferior.add(buscar);
+		pInferior.add(bBorrarUsuarios);
 		add(scrollPane);
 		add(pInferior,BorderLayout.SOUTH);
 
@@ -97,6 +102,17 @@ public class AdminSwing extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				repaint();
+			}
+		});
+		
+		bBorrarUsuarios.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new CargaUsuarios().reiniciarUsuarios();
+				dispose();
+				new AdminSwing(cu.leerUsuarios(""));
 			}
 		});
 
