@@ -63,6 +63,8 @@ public class EnemyBatch {
 			   int randX = (int)Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
 			   int randY = (int)Math.floor(Math.random() * (posMax_Y - posMin_Y + 1) + posMin_Y);
 			   Sprite spr = Enemy.get(i).getSprite_enemy(); spr.setPosition(randX, randY);
+			   Enemy.get(i).setPosX_enemy(randX);
+			   Enemy.get(i).setPosY_enemy(randY);
 			   Enemy.get(i).setSprite_enemy(spr);
 			  
 		   }

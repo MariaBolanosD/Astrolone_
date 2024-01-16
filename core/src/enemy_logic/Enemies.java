@@ -11,6 +11,8 @@ public class Enemies extends ApplicationAdapter {
 		   private SpriteBatch batch;
 		   private float Scale  = 0.2f;
 		   private Sprite sprite_enemy;
+		   private int posX;
+		   private int posY;
 
 		   public  Enemies()
 		   {
@@ -71,5 +73,22 @@ public class Enemies extends ApplicationAdapter {
 
 		public void setSprite_enemy(Sprite sprite_enemy) {
 			this.sprite_enemy = sprite_enemy;
+		}
+		
+		
+		public int getPosX_enemy() {
+			return posX;
+		}
+
+		public void setPosX_enemy(int posX) {
+			this.posX = posX;
+		}
+		
+		public int getPosY_enemy() {
+			return posY;
+		}
+
+		public void setPosY_enemy(int posY) {
+			this.posY = posY;
 		}
 }
