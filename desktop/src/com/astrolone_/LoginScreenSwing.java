@@ -17,9 +17,11 @@ import com.astrolone_.AstroLone_Juego;
 import com.astrolone_.MenuPrincipal;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.badlogic.gdx.scenes.scene2d.Action;
 
 import Objetos.Usuario;
 import gui.AdminSwing;
+import gui.PuntuacionesSwing;
 
 
 
@@ -118,6 +120,14 @@ public class LoginScreenSwing extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				 new RegisterScreenSwing(listaUsuarios);
+			}
+		});
+		botonPuntuaciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new PuntuacionesSwing();
 			}
 		});
 //		nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {
