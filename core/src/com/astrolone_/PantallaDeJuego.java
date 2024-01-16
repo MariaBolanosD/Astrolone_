@@ -45,6 +45,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private Jugador jugador;
 	private EnemyBatch enemy;
 	private ArrayList<Disparo> disparos;
+	private ArrayList<Enemies> enemigos;
 	private static final float TIEMPO_ESPERA_DISPARO = 0.3f;
 	private float esperaDeDisparo = 0;
 	
@@ -144,7 +145,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		this.fuentePuntuacion = new BitmapFont(Gdx.files.internal("fuentes/score.fnt"));
 		puntuacion = 0;
-		
+		 this.enemigos = enemy.getEnemies();
 
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 
@@ -165,28 +166,50 @@ public class PantallaDeJuego extends ScreenAdapter {
 		jugador.update();
 		
 
-//		for(Enemies enemi:enemy)
-//		{
-//			enemi.update();
-//		}
+		
 		batch.setProjectionMatrix(game.getCamera().combined);
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
 			esperaDeDisparo=0;
-			puntuacion = puntuacion+10;
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
 
 		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
+		ArrayList<Enemies> enemigosBorrar = new ArrayList<>();
 		for(Disparo disparo : disparos) {
 			disparo.update(Gdx.graphics.getDeltaTime());
 			if (disparo.borrar) {
 				disparosBorrar.add(disparo);
 			}
 		}
+		
+		
 		disparos.removeAll(disparosBorrar);
 		
+		for(Enemies enemi:enemigos)
+		{
+			enemi.update(Gdx.graphics.getDeltaTime());
+			if(enemi.isBorrado()) {
+				enemigosBorrar.add(enemi);
+			}
+		}
+		
 		//Despues de actualizar todo, mirar si hay colisiones 
+		
+		for(Disparo d : disparos) {
+			for(Enemies e : enemigos) {
+				if(d.getReac().colisionAncho(e.getReac())) {
+					d.borrar = true;
+					e.setBorrado(true);
+					puntuacion = puntuacion+100;
+				}
+				
+				
+			}
+		}
+		
+		disparos.removeAll(disparosBorrar);
+		enemigos.removeAll(enemigosBorrar);
 	}
 
 	private void updateCamara() {

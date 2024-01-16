@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import ayudas.ReaccionColisiones;
+
 public class Enemies extends ApplicationAdapter {
 		   private Texture bucketImage;
 		   private SpriteBatch batch;
@@ -13,10 +15,15 @@ public class Enemies extends ApplicationAdapter {
 		   private Sprite sprite_enemy;
 		   private int posX;
 		   private int posY;
+		   
+		   ReaccionColisiones reac;
+		   private boolean borrado;
 
 		   public  Enemies()
 		   {
 			   setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
+			   this.reac = new ReaccionColisiones(posX, posY, 45, 45);
+			   this.borrado = false;
 
 			      // create a Rectangle to logically represent the bucket
 
@@ -28,7 +35,7 @@ public class Enemies extends ApplicationAdapter {
 		   public void create() {
 		      // load the images for the droplet and the bucket, 64x64 pixels each
 		      setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
-
+		
 		      // create a Rectangle to logically represent the bucket
 
 		      setSprite_enemy(new Sprite(getBucketImage()));
@@ -90,5 +97,23 @@ public class Enemies extends ApplicationAdapter {
 
 		public void setPosY_enemy(int posY) {
 			this.posY = posY;
+		}
+		
+		public boolean isBorrado() {
+			return borrado;
+		}
+		
+		
+
+		public void setBorrado(boolean borrado) {
+			this.borrado = borrado;
+		}
+
+		public ReaccionColisiones getReac() {
+			return reac;
+		}
+		
+		public void update(float deltaTime) {
+			reac.mover(posX, posY);
 		}
 }

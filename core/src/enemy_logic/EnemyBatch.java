@@ -2,6 +2,7 @@ package enemy_logic;
 
 import java.util.ArrayList;
 
+import com.astrolone_.AstroLone_Juego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -31,9 +32,9 @@ public class EnemyBatch {
 		    	Enemies enem = new Enemies();
 			   //if(timer > enemy_spawm_Timer && counter<4)
 			   {
-				   enem.setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
+				   enem.setBucketImage(new Texture(Gdx.files.internal("asteroide.png")));
 				   Sprite spr = (new Sprite(enem.getBucketImage()));
-				   spr.setScale(0.2f);
+				   spr.setScale(1);
 				   enem.setSprite_enemy(spr);
 				   Enemy.add(enem);
 				   counter +=1;
@@ -53,10 +54,10 @@ public class EnemyBatch {
 
 	  public void Enemy_RandLocation()
 	   {
-		   int posMax_X = 800/2;
-		   int posMin_X = -(800/2);
-		   int posMax_Y = 480/2;
-		   int posMin_Y = -(480/2);
+		   int posMax_X = AstroLone_Juego.DEFAULT_WIDTH/2;
+		   int posMin_X = -(AstroLone_Juego.DEFAULT_WIDTH/2);
+		   int posMax_Y = AstroLone_Juego.DEFAULT_HEIGHT/2;
+		   int posMin_Y = -(AstroLone_Juego.DEFAULT_HEIGHT/2);
 
 		   for (Enemies element : Enemy) {
 			   int randX = (int)Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);

@@ -25,7 +25,7 @@ public class Disparo {
 		this.y = y;
 		this.ratonX = ratonX;
 		this.ratonY = ratonY;
-		this.reac = new ReaccionColisiones(x, y, 45, 45);
+		this.reac = new ReaccionColisiones(x, y, 100, 100);
 		
 
 		//float distanciaCat = ;

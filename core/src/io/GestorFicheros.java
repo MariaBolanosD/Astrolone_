@@ -1,12 +1,10 @@
 package io;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.badlogic.gdx.Gdx;
 
 import Objetos.Puntuacion;
 
@@ -21,7 +19,6 @@ public class GestorFicheros {
 			
 			
 			FileWriter fileW = new FileWriter(path+"puntuaciones.csv",true);
-			BufferedWriter bF = new BufferedWriter(fileW);
 			fileW.write(p.toString()+"\n");
 			fileW.close();
 		} catch (IOException e) {
