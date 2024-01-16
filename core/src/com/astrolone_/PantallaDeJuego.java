@@ -11,6 +11,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -51,7 +52,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private BitmapFont fuentePuntuacion;
 	private int puntuacion;
 	private Music backgroundMusic;
-
+	private Sound shootingSound;
 
 //	public PantallaDeJuego(OrthographicCamera camara) {
 //		this.camara = camara;
@@ -135,7 +136,7 @@ public class PantallaDeJuego extends ScreenAdapter {
         // Start playing the music
         backgroundMusic.play();
 		
-		
+        shootingSound = Gdx.audio.newSound(Gdx.files.internal("shoot.mp3"));
 		
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("naveJugador.png")));
@@ -173,6 +174,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && TIEMPO_ESPERA_DISPARO<=esperaDeDisparo) {
 			esperaDeDisparo=0;
 			puntuacion = puntuacion+10;
+			shootingSound.play();
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
@@ -233,6 +235,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 	public void dispose() {
 		backgroundMusic.stop();
 	    backgroundMusic.dispose();
+	    if (shootingSound != null) {
+            shootingSound.dispose();
+        }
 		Puntuacion p = new Puntuacion(puntuacion, "a");
 		p.guardarPuntuacion();
 		super.dispose();
