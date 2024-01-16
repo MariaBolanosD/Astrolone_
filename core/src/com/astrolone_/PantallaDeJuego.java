@@ -1,26 +1,22 @@
 package com.astrolone_;
 
-import java.awt.Font;
+
 import java.util.ArrayList;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.BitmapFont.Glyph;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -36,8 +32,13 @@ public class PantallaDeJuego extends ScreenAdapter {
 	//private OrthographicCamera camara;
 	private SpriteBatch batch;
 	private World mundo;
+<<<<<<< HEAD
+	
+	
+=======
 	private Box2DDebugRenderer box2DDebugRenderer;
 
+>>>>>>> main
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
 	private Stage stage;
@@ -50,7 +51,9 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	private BitmapFont fuentePuntuacion;
 	private int puntuacion;
-	private Music backgroundMusic;
+	
+<<<<<<< HEAD
+=======
 
 
 //	public PantallaDeJuego(OrthographicCamera camara) {
@@ -59,6 +62,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 //		this.mundo = new World(new Vector2(0, 0), false);
 //		this.box2DDebugRenderer = new Box2DDebugRenderer();
 //	}
+>>>>>>> main
 
 	class KeyboardProcessor extends InputAdapter{
 
@@ -125,18 +129,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.enemy = new EnemyBatch();
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
-		this.box2DDebugRenderer = new Box2DDebugRenderer();
-
-		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav"));
-
-		  // Set music to loop
-        backgroundMusic.setLooping(true);
-
-        // Start playing the music
-        backgroundMusic.play();
 		
-		
-		
+
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("naveJugador.png")));
 		this.enemy = new EnemyBatch();
@@ -188,6 +182,11 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		//Despues de actualizar todo, mirar si hay colisiones 
 	}
+<<<<<<< HEAD
+	
+	
+	
+=======
 
 	private void updateCamara() {
 		game.getCamera().position.set(new Vector3(0,0,0));
@@ -195,6 +194,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	}
 
 
+>>>>>>> main
 	@Override
 	public void render(float delta) {
 		this.update();
@@ -231,8 +231,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		backgroundMusic.stop();
-	    backgroundMusic.dispose();
+		
 		Puntuacion p = new Puntuacion(puntuacion, "a");
 		p.guardarPuntuacion();
 		super.dispose();

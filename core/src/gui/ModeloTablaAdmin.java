@@ -56,10 +56,10 @@ public class ModeloTablaAdmin extends AbstractTableModel {
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-		case 0: {
-			listaUsuarios.get(rowIndex).setNombreUsuario(aValue.toString());
-			break;
-		}
+//		case 0: {
+//			listaUsuarios.get(rowIndex).setNombreUsuario(aValue.toString());
+//			break;
+//		}
 		case 1: {
 			listaUsuarios.get(rowIndex).setContrasenyaUsuario(aValue.toString());
 			break;
