@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import Menus.PauseMenu;
+import Objetos.Puntuacion;
 
 
 public class AstroLone_Juego extends Game {
@@ -107,6 +108,7 @@ public class AstroLone_Juego extends Game {
     
     @Override
     public void dispose() {
+    
         skin.dispose();
     }
 

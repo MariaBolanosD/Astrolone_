@@ -19,6 +19,7 @@ import Menus.PauseMenu;
 public class MenuPrincipal extends ScreenAdapter{
 
 	 private final AstroLone_Juego game;
+	
 	    
 	 
 	  private Stage stage;
@@ -85,6 +86,7 @@ public class MenuPrincipal extends ScreenAdapter{
 		    // para esta pantalla. 
 		    @Override
 		    public void dispose() {
+		    	System.out.println("se cierra");
 		        stage.dispose();
 		    }
 	    

@@ -71,7 +71,9 @@ public class PauseMenu extends ScreenAdapter{
 
 			public void changed (ChangeEvent event, Actor actor) {
 				PauseMenu.this.dispose();
+				
 				PauseMenu.this.game.setScreen(new PantallaDeJuego(PauseMenu.this.game));
+				
 
              
 			}
@@ -126,6 +128,7 @@ public class PauseMenu extends ScreenAdapter{
 
 	    // método para destruir los recursos cargados
 	    // para esta pantalla. 
+	  
 	    @Override
 	    public void dispose() {
 	        stage.dispose();
