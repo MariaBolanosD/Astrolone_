@@ -12,10 +12,20 @@ public class Jugador extends EntidadEspacial
 
 	private int vida;
 	private boolean leftMove,rightMove,upMove,downMove;
+		
+	private Sprite sprite;
+	private Texture bucketImage;
+
 	
-	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
-		super(velocidad, centroX, centroY, ancho, alto, textura);
+	
+	public Jugador(loat velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
+		super(largura, altura, cuerpo);
+		this.velocidad = 4f;
 		this.vida = 3;
+
+		bucketImage = new Texture(Gdx.files.internal("droplet.png"));
+		sprite = new Sprite(bucketImage);
+	    sprite.setScale(0.5f);
 	}
 
 	@Override

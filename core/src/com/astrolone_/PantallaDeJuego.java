@@ -111,7 +111,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	public PantallaDeJuego(AstroLone_Juego game) {		
 		this.game = game;
-		
+		this.enemy = new EnemyBatch();
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
@@ -124,6 +124,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
 		
 		stage = new Stage(game.getViewport());
+		
+		//enemy.Enemy_Generator(3);
 		
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);

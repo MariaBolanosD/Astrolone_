@@ -1,16 +1,10 @@
 package enemy_logic;
 
-import java.util.ArrayList;
-import java.security.SecureRandom;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Enemies extends ApplicationAdapter {
 		   private Texture bucketImage;
