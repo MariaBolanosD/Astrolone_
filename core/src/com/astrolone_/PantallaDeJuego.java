@@ -127,14 +127,13 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
-		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav"));
+		game.setBackgroundMusic(Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav")));
 
 		  // Set music to loop
-        backgroundMusic.setLooping(true);
+        game.getBackgroundMusic().setLooping(true);
 
         // Start playing the music
-        backgroundMusic.play();
-		
+       	game.getBackgroundMusic().play();
 		
 		
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;

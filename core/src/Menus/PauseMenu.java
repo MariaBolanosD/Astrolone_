@@ -11,6 +11,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
@@ -30,6 +31,7 @@ public class PauseMenu extends ScreenAdapter{
 	 
 	  private Stage stage;
 	  private Table table;
+	  private Slider volumeSlider; // Added volume slider
 
 	 public PauseMenu(final AstroLone_Juego game)
 	 {
@@ -81,6 +83,22 @@ public class PauseMenu extends ScreenAdapter{
 	     final TextButton quitMenuButonButton = new TextButton("Quit", game.getDefaultSkin());
 	     table.row();
 	     table.add(quitMenuButonButton).minWidth(200);
+	     
+	     // Add a slider for volume control
+	        volumeSlider = new Slider(0, 1, 0.1f, false, game.getDefaultSkin());
+	        volumeSlider.setValue(game.getVolume()); // Set initial volume based on game settings
+	        table.row();
+	        table.add(volumeSlider).minWidth(200).padTop(50);
+
+	        volumeSlider.addListener(new ChangeListener() {
+	            @Override
+	            public void changed(ChangeEvent event, Actor actor) {
+	                // Adjust the volume based on the slider value
+	                game.setVolume(volumeSlider.getValue());
+	                game.saveGameProperties();
+	            }
+	        });
+	     
 
 	     exitButton.addListener(new ChangeListener() {
 
@@ -108,6 +126,7 @@ public class PauseMenu extends ScreenAdapter{
 				@Override
 				public void changed (ChangeEvent event, Actor actor) {
 					PauseMenu.this.dispose();
+					game.saveGameProperties();
 					Gdx.app.exit();
 				}
 
