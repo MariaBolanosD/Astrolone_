@@ -89,6 +89,21 @@ public class EnemyBatch {
 		    return element;
 		}
 
+	  public void updateSingleEnemyPosition(Enemies enemy) {
+		    int posMax_X = 800 / 2;
+		    int posMin_X = -(800 / 2);
+		    int posMax_Y = 480 / 2;
+		    int posMin_Y = -(480 / 2);
+
+		    int randX = (int) Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
+		    int randY = (int) Math.floor(Math.random() * (posMax_Y - posMin_Y + 1) + posMin_Y);
+
+		    Sprite spr = enemy.getSprite_enemy();
+		    spr.setPosition(randX, randY);
+		    enemy.setPosX_enemy(randX);
+		    enemy.setPosY_enemy(randY);
+		    enemy.setSprite_enemy(spr);
+		}
 
 	  public void dispose()
 	  {
