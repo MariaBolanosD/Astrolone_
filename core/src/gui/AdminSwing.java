@@ -20,6 +20,7 @@ import javax.swing.table.TableCellRenderer;
 
 import Objetos.Usuario;
 import db.CargaUsuarios;
+import io.GestorFicheros;
 
 public class AdminSwing extends JFrame{
 
@@ -29,6 +30,7 @@ public class AdminSwing extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JTextField busqueda = new JTextField(10);
 	private CargaUsuarios cu = new CargaUsuarios();
+	private GestorFicheros gf = new GestorFicheros();
 	public AdminSwing(List<Usuario> listaUsuarios) {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -77,6 +79,7 @@ public class AdminSwing extends JFrame{
 		pInferior.add(cerrar);
 		pInferior.add(buscar);
 		pInferior.add(bBorrarUsuarios);
+		pInferior.add(resetPuntuaciones);
 		add(scrollPane);
 		add(pInferior,BorderLayout.SOUTH);
 
@@ -116,6 +119,13 @@ public class AdminSwing extends JFrame{
 			}
 		});
 
+		resetPuntuaciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				gf.reiniciarPuntuaciones();
+			}
+		});
 
 	}
 

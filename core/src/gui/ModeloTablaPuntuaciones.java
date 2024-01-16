@@ -1,11 +1,12 @@
 package gui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import Objetos.Puntuacion;
-import io.GestorFicheros;
+//import io.GestorFicheros;
 
 public class ModeloTablaPuntuaciones extends AbstractTableModel{
 	/**
@@ -14,11 +15,13 @@ public class ModeloTablaPuntuaciones extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private String[] cabeceras = {"Usuario","Puntuación","Fecha"};
 	private List<Puntuacion>listaPuntuaciones;
-	private GestorFicheros gF = new GestorFicheros();
-	
-	
-	public ModeloTablaPuntuaciones() {
-		this.listaPuntuaciones = gF.leerPuntuaciones(); 
+	//	private GestorFicheros gF = new GestorFicheros();
+
+
+	public ModeloTablaPuntuaciones(List<Puntuacion> listaPuntuaciones) {
+		this.listaPuntuaciones =listaPuntuaciones ;
+
+
 	}
 	@Override
 	public int getColumnCount() {
@@ -34,7 +37,7 @@ public class ModeloTablaPuntuaciones extends AbstractTableModel{
 	public String getColumnName(int column) {
 		return cabeceras[column];
 	}
-	
+
 	@Override
 	public Object getValueAt(int row, int column) {
 		switch(column) {
@@ -43,13 +46,11 @@ public class ModeloTablaPuntuaciones extends AbstractTableModel{
 		default :return listaPuntuaciones.get(row).getFecha();
 		}
 	}
-	
+
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
-	
-	
-	
-	
+
+
 }

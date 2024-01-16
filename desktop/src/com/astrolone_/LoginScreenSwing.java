@@ -128,6 +128,7 @@ public class LoginScreenSwing extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				new PuntuacionesSwing();
+				
 			}
 		});
 //		nombreUsuario.getDocument().addDocumentListener(new DocumentListener() {

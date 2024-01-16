@@ -17,13 +17,13 @@ import Objetos.Puntuacion;
 public class GestorFicheros {
 
 	public void puntuacionAFichero(Puntuacion p) {
-	
+
 		Path path = Paths.get("");
-		
+
 		try {
 			System.out.println(path.toAbsolutePath());
-			
-			
+
+
 			FileWriter fileW = new FileWriter(path+"resources/puntuaciones.csv",true);
 			BufferedWriter bF = new BufferedWriter(fileW);
 			fileW.write(p.toString()+"\n");
@@ -32,9 +32,9 @@ public class GestorFicheros {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public ArrayList<Puntuacion> leerPuntuaciones(){
 		Path path = Paths.get("");
 		ArrayList<Puntuacion> puntuaciones = new ArrayList<>();
@@ -43,14 +43,14 @@ public class GestorFicheros {
 			FileReader fr = new FileReader(archivo);
 			BufferedReader bf = new BufferedReader(fr);
 			try {
-				
+
 				String linea = bf.readLine();
 				while(null!=linea && linea!="") {
 					String[] campos = linea.split(";");
 					puntuaciones.add(new Puntuacion((int) Integer.valueOf(campos[1]),campos[0],campos[2]));
 					linea = bf.readLine();
 				}
-				
+
 				return puntuaciones;
 			}catch(IOException e) {
 				e.printStackTrace();
@@ -63,9 +63,19 @@ public class GestorFicheros {
 			e.printStackTrace();
 			return null;
 		}
-		
+
+
+
 	}
-	
-	
-	
+	public void reiniciarPuntuaciones() {
+		try {
+			Path path = Paths.get("");
+			BufferedWriter bf = new BufferedWriter(new FileWriter(path+"resources/puntuaciones.csv"));
+			bf.write("");
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 }
