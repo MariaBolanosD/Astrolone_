@@ -55,10 +55,10 @@ public class EnemyBatch {
 
 	  public void Enemy_RandLocation()
 	  {
-		   int posMax_X = Gdx.graphics.getWidth()/2;
-		   int posMin_X = -(Gdx.graphics.getWidth()/2);
-		   int posMax_Y = Gdx.graphics.getHeight()/2;
-		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
+		  int posMax_X = Gdx.graphics.getWidth();
+		   int posMin_X = -(0);
+		   int posMax_Y = Gdx.graphics.getHeight();
+		   int posMin_Y = -(0);
 
 		   for (Enemies element : Enemy) {
 			   int randX = (int)Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
@@ -72,10 +72,11 @@ public class EnemyBatch {
 	   }
 	  
 	  public Enemies Single_Enemy_RandLocation() {
-		  int posMax_X = Gdx.graphics.getWidth()/2;
-		   int posMin_X = -(Gdx.graphics.getWidth()/2);
-		   int posMax_Y = Gdx.graphics.getHeight()/2;
-		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
+		  
+		  int posMax_X = Gdx.graphics.getWidth();
+		   int posMin_X = -(0);
+		   int posMax_Y = Gdx.graphics.getHeight();
+		   int posMin_Y = -(0);
 
 		    Enemies element = new Enemies(); // Create a new enemy instance
 
@@ -91,10 +92,11 @@ public class EnemyBatch {
 		}
 
 	  public void updateSingleEnemyPosition(Enemies enemy) {
-		  int posMax_X = Gdx.graphics.getWidth()/2;
-		   int posMin_X = -(Gdx.graphics.getWidth()/2);
-		   int posMax_Y = Gdx.graphics.getHeight()/2;
-		   int posMin_Y = -(Gdx.graphics.getHeight()/2);
+		  System.out.println(Gdx.graphics.getWidth()/2);
+		  int posMax_X = Gdx.graphics.getWidth();
+		   int posMin_X = -(0);
+		   int posMax_Y = Gdx.graphics.getHeight();
+		   int posMin_Y = -(0);
 
 		    int randX = (int) Math.floor(Math.random() * (posMax_X - posMin_X + 1) + posMin_X);
 		    int randY = (int) Math.floor(Math.random() * (posMax_Y - posMin_Y + 1) + posMin_Y);
