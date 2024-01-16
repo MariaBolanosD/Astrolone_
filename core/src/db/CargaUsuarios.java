@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+
 import Objetos.Puntuacion;
 import Objetos.Usuario;
 
@@ -45,9 +47,17 @@ public class CargaUsuarios {
 		}
 	}
 	
-//	public static void crearTablas() {
-//		stmtBBDD=crearStatement();
-//		String sql = "CREATE TABLE usuario (nick VARCHAR(20) not null,contraseña VARCHAR(20), PRIMARY KEY(nick)) ";
+	public static void crearTablas() {
+		stmtBBDD=crearStatement();
+		if(Gdx.files.internal("resources/data.db")==null) {
+			try{
+				stmtBBDD.execute("create database data");
+			crearTablas();
+			}catch(SQLException e ) {
+				e.printStackTrace();
+			}
+		}
+//		String sql = "create TABLE usuario (nick VARCHAR(20) not null,contraseña VARCHAR(20), PRIMARY KEY(nick)) ";
 //		try{
 //			stmtBBDD.executeQuery(sql);
 //		}catch(SQLException e ) {
@@ -62,7 +72,7 @@ public class CargaUsuarios {
 //			e.printStackTrace();
 //			System.out.println("Error al crear la tabla puntuacion");
 //		}
-//	}
+	}
 	
 	public static Statement crearStatement() {
 		if(stmtBBDD!=null) {
@@ -97,8 +107,6 @@ public class CargaUsuarios {
 			while(rs.next()) {
 				String usuario = rs.getString("nick");
 				String contrasenya = rs.getString("contraseña");
-//				String fecha = rs.getString("fecha");
-//				int puntuacion = rs.getInt("puntuacion");
 				puntuaciones.add(new Usuario(usuario,contrasenya));
 			}
 		}catch(SQLException e) {
@@ -120,6 +128,25 @@ public class CargaUsuarios {
 		}catch(SQLException e ) {
 			e.printStackTrace();
 		}
+	}
+	public void reiniciarUsuarios() {
+		try{
+			stmtBBDD.executeUpdate("DROP TABLE IF EXISTS usuario");
+			crearTablaUsuarios();
+		}catch(SQLException e) {
+
+			e.printStackTrace();
+		}
+	}
+	
+	public void crearTablaUsuarios() {
+		try{
+			stmtBBDD.executeUpdate("create table usuario (nick string not null, contraseña string)");
+			stmtBBDD.executeUpdate("insert into usuario (nick,contraseña) values ('admin','admin')");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

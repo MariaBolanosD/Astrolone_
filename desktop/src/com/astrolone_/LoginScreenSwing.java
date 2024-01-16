@@ -44,8 +44,6 @@ public class LoginScreenSwing extends JFrame {
 	public LoginScreenSwing(List<Usuario> listaUsuariosRecibida) {
 		final List<Usuario> listaUsuarios = cu.leerUsuarios("");
 		System.out.println(listaUsuarios);
-		listaUsuarios.add(new Usuario("admin","admin"));
-		listaUsuarios.add(new Usuario("Victor","hola"));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("ASTROLONE");
