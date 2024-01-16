@@ -1,5 +1,7 @@
 package gui;
+import com.astrolone_.AstroLone;
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,12 +21,14 @@ import Objetos.Usuario;
 
 
 
+
 public class LoginScreenSwing extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private boolean inicioSesion = false;
 	
 	private JTextField nombreUsuario = new JTextField(20);
 	private JTextField contrasenya = new JTextField(20);
@@ -86,6 +90,9 @@ public class LoginScreenSwing extends JFrame {
 						new AdminSwing(listaUsuarios);
 					}else if(listaUsuarios.get(listaUsuarios.indexOf(new Usuario(nombreUsuario.getText(),""))).getContrasenyaUsuario().equals(contrasenya.getText())){
 						JOptionPane.showMessageDialog(null, "Has iniciado sesion correctamente");
+						
+						inicioSesion = true;
+						
 					}else {
 						JOptionPane.showMessageDialog(null, "La contraseña no coincide");
 						
@@ -141,6 +148,12 @@ public class LoginScreenSwing extends JFrame {
 		
 	}
 	
+	
+	
+	public boolean getInicioSesion() {
+		return inicioSesion;
+	}
+
 	public static void main(String[] args) {
 		List<Usuario> lista = new ArrayList<>();
 		LoginScreenSwing vent = new LoginScreenSwing(lista);

@@ -39,7 +39,7 @@ public class GestorFicheros {
 	public ArrayList<Puntuacion> leerPuntuaciones(){
 		Path path = Paths.get("");
 		ArrayList<Puntuacion> puntuaciones = new ArrayList<>();
-		File archivo = new File(path+"puntuaciones.csv");
+		File archivo = new File(path+"resources/puntuaciones.csv");
 		try{
 			FileReader fr = new FileReader(archivo);
 			BufferedReader bf = new BufferedReader(fr);
