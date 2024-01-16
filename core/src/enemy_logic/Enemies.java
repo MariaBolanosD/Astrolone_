@@ -22,7 +22,7 @@ public class Enemies extends ApplicationAdapter {
 		   public  Enemies()
 		   {
 			   setBucketImage(new Texture(Gdx.files.internal("droplet.png")));
-			   this.reac = new ReaccionColisiones(posX, posY, 45, 45);
+			   this.reac = new ReaccionColisiones(posX, posY, 35, 35);
 			   this.borrado = false;
 
 			      // create a Rectangle to logically represent the bucket
