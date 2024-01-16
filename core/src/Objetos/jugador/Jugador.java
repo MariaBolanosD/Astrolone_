@@ -3,7 +3,6 @@ package Objetos.jugador;
 import com.astrolone_.AstroLone_Juego;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import Objetos.EntidadEspacial;
 
@@ -14,20 +13,10 @@ public class Jugador extends EntidadEspacial
 
 	private int vida;
 	private boolean leftMove,rightMove,upMove,downMove;
-
-	private Sprite sprite;
-	private Texture bucketImage;
-
-
-
+	
 	public Jugador(float velocidad, float centroX, float centroY, float ancho, float alto, Texture textura) {
 		super(velocidad, centroX, centroY, ancho, alto, textura);
-		//this.velocidad = 4f;
 		this.vida = 3;
-
-		bucketImage = new Texture(Gdx.files.internal("droplet.png"));
-		sprite = new Sprite(bucketImage);
-	    sprite.setScale(0.5f);
 	}
 
 	@Override
@@ -39,7 +28,6 @@ public class Jugador extends EntidadEspacial
 				posicionX = 0;
 			}
 			
-
 	    }
 	    if (rightMove)
 	    {
@@ -47,7 +35,6 @@ public class Jugador extends EntidadEspacial
 	    	if(posicionX + ancho > AstroLone_Juego.INSTANCE.DEFAULT_WIDTH) {
 	    		posicionX = AstroLone_Juego.INSTANCE.DEFAULT_WIDTH-ancho;
 	    	}
-
 	    }
 	    if(upMove)
 	    {
@@ -63,9 +50,8 @@ public class Jugador extends EntidadEspacial
 	    	if(posicionY < 0) {
 	    		posicionY = 0;
 	    	}
-
 	    }
-
+		
 	}
 
 	public int getVida() {
@@ -107,8 +93,8 @@ public class Jugador extends EntidadEspacial
 	public void setDownMove(boolean downMove) {
 		this.downMove = downMove;
 	}
+	
+	
 
-
-
-
+	
 }

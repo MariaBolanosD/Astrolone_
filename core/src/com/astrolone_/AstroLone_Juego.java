@@ -18,58 +18,43 @@ public class AstroLone_Juego extends Game {
 	public static AstroLone_Juego INSTANCE;
 	private OrthographicCamera camara;
 	private Viewport viewport;
-<<<<<<< HEAD
 	
 	public final int DEFAULT_WIDTH = 800;
     public final int DEFAULT_HEIGHT = 600;
     
-=======
-
-	public static final int DEFAULT_WIDTH = 800;
-    public static final int DEFAULT_HEIGHT = 600;
-
->>>>>>> main
     private boolean fullScreen = false;
-
-    private String username;
-
+    
     private Skin skin;
-
-	public AstroLone_Juego(String username) {
+	
+	public AstroLone_Juego() {
 		INSTANCE=this;
-		this.username = username;
 	}
-
+	
 	@Override
 	public void create() {
 		
 		//this.camara.setToOrtho(false, widthScreen, heigtScreen);
-
+		
 		this.camara = new OrthographicCamera(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.camara.position.set(DEFAULT_WIDTH/2f, DEFAULT_HEIGHT/2, 0);
-        this.viewport = new StretchViewport(DEFAULT_WIDTH, DEFAULT_HEIGHT, camara);
-
-        this.skin = new Skin(Gdx.files.classpath("widgets/uiskin.json"));
-        //Skin skin2 = getDefaultSkin() ;
+		this.camara.position.set(camara.viewportWidth/2, camara.viewportHeight/2, 0);
+        this.viewport = new StretchViewport(camara.viewportWidth, camara.viewportHeight, camara);
+        
+        this.skin = new Skin(Gdx.files.internal("widgets/uiskin.json"));
+        
         //cambiar constructor de patalla de juego
         this.setScreen(new MenuPrincipal(this));
-
-       }
-
-	// Additional method to access the username
-    public String getUsername() {
-        return username;
-    }
-
+		
+	}
+	
 	public Viewport getViewport() {
 		// TODO Auto-generated method stub
 		return this.viewport;
 	}
-
+	 
 	public Skin getDefaultSkin() {
         return skin;
     }
-
+	
 	public Camera getCamera()
 	{
 		return camara;
@@ -80,14 +65,14 @@ public class AstroLone_Juego extends Game {
     public void setFullscreen() {
         Monitor currMonitor = Gdx.graphics.getPrimaryMonitor();
         DisplayMode displayMode = Gdx.graphics.getDisplayMode(currMonitor);
-
+        
         if(!Gdx.graphics.setFullscreenMode(displayMode)) {
             Gdx.app.log(AstroLone_Juego.class.getName(), "Could not change screen mode to full screen");
         } else {
             fullScreen = true;
         }
     }
-
+    
     // establece el modo en ventana utilizando
     // el modo por defecto
     public void setWindowed() {
@@ -99,18 +84,16 @@ public class AstroLone_Juego extends Game {
     public boolean isFullScreen() {
         return fullScreen;
     }
-
+    
     @Override
     public void resize (int width, int height) {
         viewport.update(width, height);
     }
-
+    
     @Override
     public void dispose() {
     
         skin.dispose();
     }
-
-
 
 }

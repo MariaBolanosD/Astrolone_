@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public abstract class EntidadEspacial {
-
+	
 	float Velocidad;
 	protected float posicionX,posicionY;
 	protected float ancho,alto;
-
+	
 	Texture textura;
-
-
+	
+	
 
 	public EntidadEspacial(float velocidad, float centroX, float centroY, float ancho, float alto,
 			Texture textura) {
@@ -22,15 +22,15 @@ public abstract class EntidadEspacial {
 		this.alto = alto;
 		this.textura = textura;
 	}
-
+	
 	public void draw(Batch batch) {
 		batch.draw(textura, posicionX, posicionY, ancho, alto);
 	}
 
-
+	
 	public abstract void update();
-
-
+	
+	    
 
 	public float getPosicionX() {
 		return posicionX;
@@ -47,8 +47,8 @@ public abstract class EntidadEspacial {
 	public void setPosicionY(float posicionY) {
 		this.posicionY = posicionY;
 	}
-
-
-
+	
+	
+	
 
 }

@@ -28,21 +28,16 @@ import enemy_logic.Enemies;
 import enemy_logic.EnemyBatch;
 
 public class PantallaDeJuego extends ScreenAdapter {
-
+	
 	//private OrthographicCamera camara;
 	private SpriteBatch batch;
 	private World mundo;
-<<<<<<< HEAD
 	
 	
-=======
-	private Box2DDebugRenderer box2DDebugRenderer;
-
->>>>>>> main
 	private AstroLone_Juego game;
 	private static final String SCREEN_NAME = "Game Screen";
 	private Stage stage;
-
+	
 	private Jugador jugador;
 	private EnemyBatch enemy;
 	private ArrayList<Disparo> disparos;
@@ -52,25 +47,14 @@ public class PantallaDeJuego extends ScreenAdapter {
 	private BitmapFont fuentePuntuacion;
 	private int puntuacion;
 	
-<<<<<<< HEAD
-=======
-
-
-//	public PantallaDeJuego(OrthographicCamera camara) {
-//		this.camara = camara;
-//		this.batch = new SpriteBatch();
-//		this.mundo = new World(new Vector2(0, 0), false);
-//		this.box2DDebugRenderer = new Box2DDebugRenderer();
-//	}
->>>>>>> main
 
 	class KeyboardProcessor extends InputAdapter{
 
-
-
+		
+		
 		@Override
 		public boolean keyDown(int keycode) {
-
+			
 			switch (keycode) {
 			case Keys.LEFT:jugador.setLeftMove(true);
 				break;
@@ -83,15 +67,15 @@ public class PantallaDeJuego extends ScreenAdapter {
 			default:
 				break;
 			}
-
-
+			
+			
 			return super.keyDown(keycode);
 		}
-
+		
 		@Override
-		public boolean keyUp(int key) {
+		public boolean keyUp(int key) {			
 			switch (key) {
-
+			
 				case Keys.LEFT:		jugador.setLeftMove(false);
 									break;
 				case Keys.RIGHT:	jugador.setRightMove(false);
@@ -109,7 +93,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 			return false;
 		}
-
+		
 		private void toogleFullScreen() {
 			if (game.isFullScreen()) {
 				game.setWindowed();
@@ -117,16 +101,16 @@ public class PantallaDeJuego extends ScreenAdapter {
 				game.setFullscreen();
 			}
 		}
-
+		
 		public void toPauseScreen() {
 			game.getScreen().dispose();
 			game.setScreen(new PauseMenu(game));
 		}
 	}
-
-	public PantallaDeJuego(AstroLone_Juego game) {
+	
+	public PantallaDeJuego(AstroLone_Juego game) {		
 		this.game = game;
-		this.enemy = new EnemyBatch();
+		
 		this.batch = new SpriteBatch();
 		this.mundo = new World(new Vector2(0, 0), false);
 		
@@ -139,17 +123,14 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.fuentePuntuacion = new BitmapFont(Gdx.files.internal("fuentes/score.fnt"));
 		puntuacion = 0;
 		
-
 		Gdx.app.log(SCREEN_NAME, "Iniciando screen principal del juego");
-
+		
 		stage = new Stage(game.getViewport());
-
-		//enemy.Enemy_Generator(3);
-
+		
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(stage);
 		multiplexer.addProcessor(new KeyboardProcessor());
-
+		
 		// registramos el multiplexador de eventos como escuchador
 		Gdx.input.setInputProcessor(multiplexer);
 	}
@@ -170,7 +151,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 			Vector3 ldCoordinates = game.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			disparos.add(new Disparo(jugador.getPosicionX(),jugador.getPosicionY(), ldCoordinates.x,ldCoordinates.y));
 		}
-
+		
 		ArrayList<Disparo> disparosBorrar = new ArrayList<>();
 		for(Disparo disparo : disparos) {
 			disparo.update(Gdx.graphics.getDeltaTime());
@@ -182,26 +163,16 @@ public class PantallaDeJuego extends ScreenAdapter {
 		
 		//Despues de actualizar todo, mirar si hay colisiones 
 	}
-<<<<<<< HEAD
 	
 	
 	
-=======
-
-	private void updateCamara() {
-		game.getCamera().position.set(new Vector3(0,0,0));
-		game.getCamera().update();
-	}
-
-
->>>>>>> main
 	@Override
 	public void render(float delta) {
 		this.update();
 		esperaDeDisparo+=delta;
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+		
 		batch.begin();
 		//Render de objetos
 		//box2DDebugRenderer.render(mundo, game.getCamera().combined.scl(Constantes.pixelesPorMetro));
@@ -211,18 +182,18 @@ public class PantallaDeJuego extends ScreenAdapter {
 		for (Disparo disparo : disparos) {
 			disparo.render(batch);
 		}
-
+		
 		for(Enemies en : enemy.getEnemies())
 		{
 			en.render(batch);
 			//System.out.println(2);
 			//System.out.println( en.getSprite_enemy().getX());
 		}
-
-
+		
+		
 		batch.end();
-
-
+		
+		
 	}
 
 	public int getPuntuacion() {
@@ -231,7 +202,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		
+		System.out.println("se cierra la venatna de juego");
 		Puntuacion p = new Puntuacion(puntuacion, "a");
 		p.guardarPuntuacion();
 		super.dispose();
@@ -240,7 +211,5 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	
 	
-
-
 
 }

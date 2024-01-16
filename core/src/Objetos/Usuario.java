@@ -3,7 +3,7 @@ package Objetos;
 public class Usuario {
 	private String nombreUsuario;
 	private String contrasenyaUsuario;
-
+	
 	public Usuario() {
 		this.nombreUsuario="";
 		this.contrasenyaUsuario="";
@@ -12,8 +12,8 @@ public class Usuario {
 		this.nombreUsuario=nombre;
 		this.contrasenyaUsuario = contrasenya;
 	}
-
-
+	
+	
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
@@ -42,5 +42,5 @@ public class Usuario {
 		// TODO Auto-generated method stub
 		return this.nombreUsuario.hashCode();
 	}
-
+	
 }
