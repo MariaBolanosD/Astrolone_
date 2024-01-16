@@ -38,12 +38,14 @@ public class ModeloTablaAdmin extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int column) {
 		switch (column) {
-
+		case 0: {
+			return listaUsuarios.get(row).getNombreUsuario();
+		}
 		case 1: {
-			listaUsuarios.get(row).getContrasenyaUsuario();
+			return listaUsuarios.get(row).getContrasenyaUsuario();
 		}
 		default: {
-			return listaUsuarios.get(row).getNombreUsuario();
+			return null;
 		}
 		}
 	}
