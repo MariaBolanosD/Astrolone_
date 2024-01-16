@@ -40,7 +40,6 @@ public class Disparo {
 	}
 	
 	private float calculoVel(float origen, float destino) {
-		System.out.println(ratonY);
 		return distancia(origen, destino)/pitagoras(x, y, ratonX, ratonY);
 		
 		
@@ -52,7 +51,6 @@ public class Disparo {
 	}
 	
 	private float distancia(float origen, float destino) {
-		//return (float) (Math.sqrt(Math.pow(origen, 2) + Math.pow(destino, 2)));
 		return (float) (origen-destino);
 	}
 
