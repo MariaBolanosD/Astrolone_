@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -49,7 +50,7 @@ public class PantallaDeJuego extends ScreenAdapter {
 	
 	private BitmapFont fuentePuntuacion;
 	private int puntuacion;
-	
+	private Music backgroundMusic;
 
 
 //	public PantallaDeJuego(OrthographicCamera camara) {
@@ -126,6 +127,16 @@ public class PantallaDeJuego extends ScreenAdapter {
 		this.mundo = new World(new Vector2(0, 0), false);
 		this.box2DDebugRenderer = new Box2DDebugRenderer();
 
+		backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Wizario4.wav"));
+
+		  // Set music to loop
+        backgroundMusic.setLooping(true);
+
+        // Start playing the music
+        backgroundMusic.play();
+		
+		
+		
 		BodyDef bDef = new BodyDef(); bDef.type = BodyDef.BodyType.DynamicBody;
 		this.jugador = new Jugador(2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 50, 50, new Texture(Gdx.files.internal("naveJugador.png")));
 		this.enemy = new EnemyBatch();
@@ -220,7 +231,8 @@ public class PantallaDeJuego extends ScreenAdapter {
 
 	@Override
 	public void dispose() {
-		
+		backgroundMusic.stop();
+	    backgroundMusic.dispose();
 		Puntuacion p = new Puntuacion(puntuacion, "a");
 		p.guardarPuntuacion();
 		super.dispose();
