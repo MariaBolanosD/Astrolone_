@@ -3,11 +3,15 @@ package com.astrolone_;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
+
+import javax.sound.midi.VoiceStatus;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 import com.badlogic.gdx.Graphics.Monitor;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -32,7 +36,7 @@ public class AstroLone_Juego extends Game {
     private boolean fullScreen = false;
 
     private String username;
-
+    private Music backgroundMusic;
     private Skin skin;
 
 	public AstroLone_Juego(String username) {
@@ -70,8 +74,28 @@ public class AstroLone_Juego extends Game {
 	}
 
 
+	public Music getBackgroundMusic()
+	{
+		return backgroundMusic;
+	}
+	
+	public void setBackgroundMusic(Music music)
+	{
+		backgroundMusic = music;
+	}
+	
+	public void setVolume(float vol)
+	{
+		backgroundMusic.setVolume(vol);
+	}
+	
+	public float getVolume()
+	{
+		return backgroundMusic.getVolume();
+	}
+	
 	public void saveGameProperties() {
-		Gdx.app.log("FILEPATH", Gdx.files.local(CONFIG_FILE_PATH).toString());
+		
         try (FileOutputStream output = new FileOutputStream(Gdx.files.internal(CONFIG_FILE_PATH).file())) {
             gameProperties.store(output, "Game Configuration");
         } catch (IOException e) {
